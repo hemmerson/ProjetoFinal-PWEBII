@@ -10,30 +10,12 @@ import java.util.List;
  * on date 24/08/2023
  */
 @Entity
-public class Medico implements Serializable {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    private Long id;
-    private String nome;
+@PrimaryKeyJoinColumn(name = "id_pessoa")
+public class Medico extends Pessoa implements Serializable {
+
     private String crm;
     @OneToMany(mappedBy = "medico")
     private List<Consulta> consultas;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public String getCrm() {
         return crm;
