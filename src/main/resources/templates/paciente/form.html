@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-    <div th:replace="base :: navlinks"></div>
+    <div th:replace="~{base :: navlinks}"></div>
     <h1>Cadastrar Paciente</h1>
     <hr>
     <form class="row g-3" th:action="${paciente.id == 0} ? @{/pacientes/save} : @{/pacientes/update}"

@@ -1,6 +1,8 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +17,7 @@ public class Medico extends Pessoa implements Serializable {
 
     private String crm;
     @OneToMany(mappedBy = "medico")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Consulta> consultas;
 
     public String getCrm() {

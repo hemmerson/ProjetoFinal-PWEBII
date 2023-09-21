@@ -1,6 +1,8 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.List;
 public class Paciente extends Pessoa implements Serializable {
     private String telefone;
     @OneToMany(mappedBy = "paciente")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Consulta> consultas;
 
     public String getTelefone() {

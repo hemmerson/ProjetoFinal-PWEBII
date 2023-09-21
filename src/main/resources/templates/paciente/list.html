@@ -11,7 +11,7 @@
 <body>
 
 <div class="container">
-    <div th:replace="base :: navlinks"></div>
+    <div th:replace="~{base :: navlinks}"></div>
     <h1>Lista de Pacientes</h1>
     <hr>
     <a class="btn btn-outline-dark" th:href="@{form}">Novo Paciente</a>

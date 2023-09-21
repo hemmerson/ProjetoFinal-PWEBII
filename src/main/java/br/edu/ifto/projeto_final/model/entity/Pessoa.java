@@ -11,7 +11,6 @@ import java.io.Serializable;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@SequenceGenerator(name = "seq_generator", sequenceName = "SEQ_PESSOA", initialValue = 11, allocationSize = 1)
 public class Pessoa implements Serializable {
 
     @Id
