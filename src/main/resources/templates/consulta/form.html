@@ -18,18 +18,39 @@
                 <input class="form-control" type="hidden" th:field="*{id}">
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" id="nome_paciente" type="text" th:field="*{paciente.nome}"
-                               placeholder="Nome do Paciente">
-                        <label for="nome_paciente">Nome do Paciente</label>
+                        <select id="paciente" name="paciente" th:field="*{paciente.id}" class="form-select">
+
+                            <option value="">Selecione...</option>
+
+                            <option th:each="p : ${pacientes}"
+
+                                    th:value="${p.id}"
+
+                                    th:text="${p.nome}">
+
+                            </option>
+
+                        </select>
+                        <label for="paciente">Nome do Paciente</label>
                     </div>
                 </div>
                 <input class="form-control" type="hidden" th:field="*{paciente.id}">
-                <input class="form-control" type="hidden" th:field="*{medico.id}">
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" id="nome_medico" type="text" th:field="*{medico.nome}"
-                               placeholder="Nome do Médico">
-                        <label for="nome_medico">Nome do Médico</label>
+                        <select id="medico" name="medico" th:field="*{medico.id}" class="form-select">
+
+                            <option value="">Selecione...</option>
+
+                            <option th:each="m : ${medicos}"
+
+                                    th:value="${m.id}"
+
+                                    th:text="${m.nome}">
+
+                            </option>
+
+                        </select>
+                        <label for="medico">Nome do Médico</label>
                     </div>
                 </div>
                 <div class="col-md-6">

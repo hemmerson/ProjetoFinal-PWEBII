@@ -1,11 +1,7 @@
 <header th:fragment="header" class="container h-custom">
-    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark" aria-label="Eighth navbar example">
+    <nav class="navbar navbar-expand-xxl navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">Consultório Médico |</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample07"
-                    aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div class="collapse navbar-collapse" id="navbarsExample07">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -14,30 +10,34 @@
                     </li>
                 </ul>
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                       aria-expanded="false">Pacientes</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown"
+                            aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <button class="btn btn-dark btn-lg dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown"
+                       aria-expanded="false">Pacientes</button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown01">
                         <li><a class="dropdown-item" th:href="@{/pacientes/form}">Cadastrar</a></li>
                         <li><a class="dropdown-item" th:href="@{/pacientes/list}">Listar</a></li>
                     </ul>
                 </div>
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown02" data-bs-toggle="dropdown"
-                       aria-expanded="false">Médicos</a>
+                    <button class="btn btn-dark btn-lg dropdown-toggle" id="dropdown02" data-bs-toggle="dropdown"
+                            aria-expanded="false">Médicos</button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown02">
                         <li><a class="dropdown-item" th:href="@{/medicos/form}">Cadastrar</a></li>
                         <li><a class="dropdown-item" th:href="@{/medicos/list}">Listar</a></li>
                     </ul>
                 </div>
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown"
-                       aria-expanded="false">Consultas</a>
+                    <button class="btn btn-dark btn-lg dropdown-toggle" id="dropdown03" data-bs-toggle="dropdown"
+                       aria-expanded="false">Consultas</button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown03">
                         <li><a class="dropdown-item" th:href="@{/consultas/form}">Cadastrar</a></li>
                         <li><a class="dropdown-item" th:href="@{/consultas/list}">Listar</a></li>
                     </ul>
                 </div>
-                <a class="btn btn-outline-primary" href="/login">Sair</a>
+                <a class="btn btn-dark btn-lg" href="/login">Sair</a>
             </div>
         </div>
     </nav>

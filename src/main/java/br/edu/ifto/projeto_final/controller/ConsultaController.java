@@ -2,6 +2,8 @@ package br.edu.ifto.projeto_final.controller;
 
 import br.edu.ifto.projeto_final.model.entity.Consulta;
 import br.edu.ifto.projeto_final.model.repository.ConsultaRepository;
+import br.edu.ifto.projeto_final.model.repository.MedicoRepository;
+import br.edu.ifto.projeto_final.model.repository.PacienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +25,17 @@ public class ConsultaController {
     @Autowired
     ConsultaRepository repository;
 
+    @Autowired
+    PacienteRepository pacienteRepository;
+
+    @Autowired
+    MedicoRepository medicoRepository;
+
     @GetMapping("/form")
-    public String form(Consulta consulta) {
-        return "/consulta/form";
+    public ModelAndView edit(Consulta consulta, ModelMap model) {
+        model.addAttribute("pacientes", pacienteRepository.pacientes());
+        model.addAttribute("medicos", medicoRepository.medicos());
+        return new ModelAndView("/consulta/form", model);
     }
 
     @GetMapping("/list")
@@ -59,6 +69,8 @@ public class ConsultaController {
      */
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
+        model.addAttribute("pacientes", repository.consulta(id).getPaciente());
+        model.addAttribute("medicos", repository.consulta(id).getMedico());
         model.addAttribute("consulta", repository.consulta(id));
         return new ModelAndView("/consulta/form", model);
     }
