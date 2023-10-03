@@ -15,18 +15,12 @@ import java.util.List;
 @Entity
 @PrimaryKeyJoinColumn(name = "id_pessoa")
 public class Paciente extends Pessoa implements Serializable {
-    private String telefone;
+    private String cpf;
+    private String planoSaude;
+
     @OneToMany(mappedBy = "paciente")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Consulta> consultas;
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
 
     public List<Consulta> getConsultas() {
         return consultas;
@@ -34,6 +28,22 @@ public class Paciente extends Pessoa implements Serializable {
 
     public void setConsultas(List<Consulta> consultas) {
         this.consultas = consultas;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getPlanoSaude() {
+        return planoSaude;
+    }
+
+    public void setPlanoSaude(String planoSaude) {
+        this.planoSaude = planoSaude;
     }
 
     public Double totalConsultas(){

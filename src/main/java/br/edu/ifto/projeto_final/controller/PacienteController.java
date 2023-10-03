@@ -1,15 +1,13 @@
 package br.edu.ifto.projeto_final.controller;
 
+import br.edu.ifto.projeto_final.model.entity.Medico;
 import br.edu.ifto.projeto_final.model.entity.Paciente;
 import br.edu.ifto.projeto_final.model.repository.PacienteRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -18,20 +16,21 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Transactional
 @Controller
-@RequestMapping("pacientes")
+@RequestMapping("paciente")
 public class PacienteController {
     @Autowired
     PacienteRepository repository;
 
     @GetMapping("/form")
-    public String form(Paciente paciente) {
-        return "/paciente/form";
+    public ModelAndView form(Paciente paciente, ModelMap model) {
+        model.addAttribute("pessoa", paciente);
+        return new ModelAndView("/pessoa/form");
     }
 
     @GetMapping("/list")
     public ModelAndView listar(ModelMap model) {
-        model.addAttribute("pacientes", repository.pacientes());
-        return new ModelAndView("/paciente/list", model);
+        model.addAttribute("pessoa", repository.pacientes());
+        return new ModelAndView("/pessoa/list", model);
     }
 
     @GetMapping("/consultas/{id}")
@@ -42,9 +41,9 @@ public class PacienteController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(Paciente paciente) {
+    public ModelAndView save(@ModelAttribute("pessoa") Paciente paciente) {
         repository.save(paciente);
-        return new ModelAndView("redirect:/pacientes/list");
+        return new ModelAndView("redirect:/paciente/list");
     }
 
     /**
@@ -55,7 +54,7 @@ public class PacienteController {
     @GetMapping("/remove/{id}")
     public ModelAndView remove(@PathVariable("id") Long id) {
         repository.remove(id);
-        return new ModelAndView("redirect:/pacientes/list");
+        return new ModelAndView("redirect:/paciente/list");
     }
 
     /**
@@ -65,13 +64,13 @@ public class PacienteController {
      */
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("paciente", repository.paciente(id));
-        return new ModelAndView("/paciente/form", model);
+        model.addAttribute("pessoa", repository.paciente(id));
+        return new ModelAndView("/pessoa/form", model);
     }
 
     @PostMapping("/update")
     public ModelAndView update(Paciente paciente) {
         repository.update(paciente);
-        return new ModelAndView("redirect:/pacientes/list");
+        return new ModelAndView("redirect:/paciente/list");
     }
 }

@@ -16,6 +16,8 @@ import java.util.List;
 public class Medico extends Pessoa implements Serializable {
 
     private String crm;
+    private String especialidade;
+
     @OneToMany(mappedBy = "medico")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Consulta> consultas;
@@ -26,6 +28,14 @@ public class Medico extends Pessoa implements Serializable {
 
     public void setCrm(String crm) {
         this.crm = crm;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
     }
 
     public List<Consulta> getConsultas() {

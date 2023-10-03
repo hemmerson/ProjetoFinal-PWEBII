@@ -1,32 +1,32 @@
-INSERT INTO pessoa (id, nome) VALUES (1,'João Silva');
-INSERT INTO paciente (id_pessoa, telefone) VALUES (1, '1234567890');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (1,'João Silva', 'joaosilva@email.com', '1234567890');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (1, '222.111.333-21', 'GEAP');
 
-INSERT INTO pessoa (id, nome) VALUES (2,'Maria Santos');
-INSERT INTO paciente (id_pessoa, telefone) VALUES (2, '9876543210');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (2,'Maria Santos', 'mariasantos@email.com', '9876543210');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (2, '111.333.444-01', 'Bradesco Saúde');
 
-INSERT INTO pessoa (id, nome) VALUES (3,'Carlos Oliveira');
-INSERT INTO paciente (id_pessoa, telefone) VALUES (3, '5555555555');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (3,'Carlos Oliveira', 'carlosoliveira@email.com', '5555555555');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (3, '555.444.666-99', 'UNIMED');
 
-INSERT INTO pessoa (id, nome) VALUES (4,'Ana Souza');
-INSERT INTO paciente (id_pessoa, telefone) VALUES (4, '7777777777');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (4,'Ana Souza', 'anasouza@email.com', '7777777777');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (4, '888.999.000.11', 'Hapvida');
 
-INSERT INTO pessoa (id, nome) VALUES (5,'Rafael Pereira');
-INSERT INTO paciente (id_pessoa, telefone) VALUES (5, '9999999999');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (5,'Rafael Pereira', 'rafaelpereira@email.com', '9999999999');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (5, '333.222.111-00', 'GEAP');
 -- ------------------------------------------------------------------------------
-INSERT INTO pessoa (id, nome) VALUES (6,'Dr. João Santos');
-INSERT INTO medico (id_pessoa, crm) VALUES (6, '12345');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (6,'Dr. João Santos', 'drjoaosantos@email.com', '918273645');
+INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (6, '12345', 'Geriatra');
 
-INSERT INTO pessoa (id, nome) VALUES (7,'Dra. Maria Oliveira');
-INSERT INTO medico (id_pessoa, crm) VALUES (7, '54321');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (7,'Dra. Maria Oliveira', 'drmariaoliveira@email.com', '654321234');
+INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (7, '54321', 'Clínico Geral');
 
-INSERT INTO pessoa (id, nome) VALUES (8,'Dr. Carlos Silva');
-INSERT INTO medico (id_pessoa, crm) VALUES (8, '98765');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (8,'Dr. Carlos Silva', 'drcarlossilva@email.com', '423156788');
+INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (8, '98765', 'Oncologia');
 
-INSERT INTO pessoa (id, nome) VALUES (9,'Dra. Ana Pereira');
-INSERT INTO medico (id_pessoa, crm) VALUES (9, '67890');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (9,'Dra. Ana Pereira', 'dranapereira@email.com', '876567821');
+INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (9, '67890', 'Pediatra');
 
-INSERT INTO pessoa (id, nome) VALUES (10,'Dr. Rafael Costa');
-INSERT INTO medico (id_pessoa, crm) VALUES (10, '23456');
+INSERT INTO pessoa (id, nome, email, telefone) VALUES (10,'Dr. Rafael Costa', 'drrafaelcosta@email.com', '231123223');
+INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (10, '23456', 'Oftamologista');
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------
 

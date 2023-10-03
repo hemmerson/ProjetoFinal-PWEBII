@@ -9,32 +9,34 @@
 <body>
 <main>
     <div class="container">
-        <h1>Lista de Pacientes</h1>
+        <h1>Lista</h1>
         <hr>
-        <a class="btn btn-outline-dark" th:href="@{form}">Novo Paciente</a>
+        <a class="btn btn-outline-dark" th:href="@{form}">Novo</a>
         <div>
             <table class="table table-striped">
                 <thead>
                 <tr>
                     <th>Id</th>
                     <th>Nome</th>
+                    <th>Email</th>
                     <th>Telefone</th>
                     <th>Consultas</th>
                     <th colspan="3">#Links</th>
                 </tr>
                 </thead>
-                <tr th:each="p : ${pacientes}">
+                <tr th:each="p : ${pessoa}">
 
                     <td th:text="${p.id}"></td>
                     <td th:text="${p.nome}"></td>
+                    <td th:text="${p.email}"></td>
                     <td th:text="${p.telefone}"></td>
                     <td><a class="btn btn-outline-primary"
-                           th:href="@{/pacientes/consultas/{id}(id=${p.id})}">Consultas</a>
+                           th:href="@{/{classe}/consultas/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Consultas</a>
                     </td>
-                    <td><a class="btn btn-outline-secondary" th:href="@{/pacientes/edit/{id}(id=${p.id})}">Editar</a>
+                    <td><a class="btn btn-outline-secondary" th:href="@{/{classe}/edit/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Editar</a>
                     </td>
                     <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
-                           class="btn btn-outline-danger" th:href="@{/pacientes/remove/{id}(id=${p.id})}">Excluir</a>
+                           class="btn btn-outline-danger" th:href="@{/{classe}/remove/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Excluir</a>
                     </td>
                 </tr>
             </table>
