@@ -32,10 +32,17 @@ public class ConsultaController {
     MedicoRepository medicoRepository;
 
     @GetMapping("/form")
-    public ModelAndView edit(Consulta consulta, ModelMap model) {
+    public ModelAndView form(Consulta consulta, ModelMap model) {
         model.addAttribute("pacientes", pacienteRepository.pacientes());
         model.addAttribute("medicos", medicoRepository.medicos());
         return new ModelAndView("/consulta/form", model);
+    }
+
+    @GetMapping("/form2")
+    public ModelAndView form2(Consulta consulta, ModelMap model) {
+        model.addAttribute("pacientes", pacienteRepository.pacientes());
+        model.addAttribute("medicos", medicoRepository.medicos());
+        return new ModelAndView("/consulta/form2", model);
     }
 
     @GetMapping("/list")
