@@ -2,7 +2,7 @@
 
 <html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
 
-<head th:insert="~{fragments/head :: head(~{})}">
+<head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
     <title>Cadastrar Consulta</title>
 </head>
 

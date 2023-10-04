@@ -73,4 +73,10 @@ public class MedicoController {
         repository.update(medico);
         return new ModelAndView("redirect:/medico/list");
     }
+
+    @GetMapping("/details/{id}")
+    public ModelAndView details(@PathVariable("id") Long id, ModelMap model) {
+        model.addAttribute("pessoa", repository.medico(id));
+        return new ModelAndView("/pessoa/detalhes", model);
+    }
 }

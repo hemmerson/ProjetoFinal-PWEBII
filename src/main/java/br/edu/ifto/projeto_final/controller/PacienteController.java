@@ -68,6 +68,12 @@ public class PacienteController {
         return new ModelAndView("/pessoa/form", model);
     }
 
+    @GetMapping("/details/{id}")
+    public ModelAndView details(@PathVariable("id") Long id, ModelMap model) {
+        model.addAttribute("pessoa", repository.paciente(id));
+        return new ModelAndView("/pessoa/detalhes", model);
+    }
+
     @PostMapping("/update")
     public ModelAndView update(Paciente paciente) {
         repository.update(paciente);

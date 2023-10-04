@@ -3,59 +3,58 @@
 <html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
 
 <head th:replace="~{fragments/head :: head(~{::title},~{})}">
-    <title th:if="${pessoa.tipoObjeto('paciente')}">Cadastro de Paciente</title>
-    <title th:if="${pessoa.tipoObjeto('medico')}">Cadastro de Médico</title>
+    <title th:if="${pessoa.tipoObjeto('paciente')}">Detalhes do Paciente</title>
+    <title th:if="${pessoa.tipoObjeto('medico')}">Detalhes do Médico</title>
 </head>
 
 <body>
 <main>
     <div class="container h-custom">
-        <h1 th:if="${pessoa.tipoObjeto('paciente')}">Cadastro de Pacientes</h1>
-        <h1 th:if="${pessoa.tipoObjeto('medico')}">Cadastro de Médicos</h1>
+        <h1 th:if="${pessoa.tipoObjeto('paciente')}">Detalhes do Pacientes</h1>
+        <h1 th:if="${pessoa.tipoObjeto('medico')}">Detalhes do Médicos</h1>
         <hr>
         <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
-            <form class="row g-3"
-                  th:action="${pessoa.getId() == null} ? |/${pessoa.nomeClasse()}/save| : |/${pessoa.nomeClasse()}/update|" th:object="${pessoa}"
-                  method="post">
-                <input class="form-control" type="hidden" th:field="*{id}">
+            <form class="row g-3" th:object="${pessoa}" >
+                <input class="form-control" type="hidden" th:field="*{id}" >
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" id="nome" type="text" th:field="*{nome}" placeholder="Nome">
+                        <input class="form-control" id="nome" type="text" th:field="*{nome}" placeholder="Nome" disabled>
                         <label for="nome">Nome</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
                         <input class="form-control" id="email" type="text" th:field="*{email}"
-                               placeholder="Email">
+                               placeholder="Email" disabled>
                         <label for="email">Email</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
                         <input class="form-control" id="telefone" type="text" th:field="*{telefone}"
-                               placeholder="Telefone">
+                               placeholder="Telefone" disabled>
                         <label for="telefone">Telefone</label>
                     </div>
                 </div>
                 <hr/>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('paciente')}" id="cpf" th:field="*{cpf}" placeholder="CPF">
+                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('paciente')}" id="cpf" th:field="*{cpf}" placeholder="CPF" disabled>
                         <label th:if="${pessoa.tipoObjeto('paciente')}" for="cpf">CPF</label>
-                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('medico')}" id="crm" th:field="*{crm}" placeholder="CRM">
+                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('medico')}" id="crm" th:field="*{crm}" placeholder="CRM" disabled>
                         <label th:if="${pessoa.tipoObjeto('medico')}" for="crm">CRM</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('paciente')}" id="plano" th:field="*{planoSaude}" placeholder="Plano de Saúde">
+                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('paciente')}" id="plano"
+                               th:field="*{planoSaude}" placeholder="Plano de Saúde" disabled>
                         <label th:if="${pessoa.tipoObjeto('paciente')}" for="plano">Plano de Saúde</label>
-                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('medico')}" id="especialidade" th:field="*{especialidade}" placeholder="Especialidade">
+                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('medico')}" id="especialidade"
+                               th:field="*{especialidade}" placeholder="Especialidade" disabled>
                         <label th:if="${pessoa.tipoObjeto('medico')}" for="especialidade">Especialidade</label>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-outline-primary btn-lg">Enviar</button>
                 <a th:href="|/${pessoa.nomeClasse()}/list|" class="btn btn-secondary btn-lg">Lista</a>
             </form>
         </div>
