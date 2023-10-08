@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
+    <title th:if="${pessoa[0].tipoObjeto('paciente')}">Lista de Pacientes</title>
+    <title th:if="${pessoa[0].tipoObjeto('medico')}">Lista de Médicos</title>
+</head>
+
+<body>
+<main>
+    <div class="container">
+        <h1 th:if="${pessoa[0].tipoObjeto('paciente')}">Lista de Pacientes</h1>
+        <h1 th:if="${pessoa[0].tipoObjeto('medico')}">Lista de Médicos</h1>
+        <hr>
+        <a class="btn btn-outline-dark" th:href="@{form}">Novo</a>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Consultas</th>
+                    <th colspan="4">#Links</th>
+                </tr>
+                </thead>
+                <tr th:each="p : ${pessoa}">
+
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.nome}"></td>
+                    <td th:text="${p.email}"></td>
+                    <td th:text="${p.telefone}"></td>
+                    <td>
+                        <a class="btn btn-outline-primary"
+                           th:href="@{/{classe}/consultas/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Consultas</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success" th:href="@{/{classe}/details/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Detalhes</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-secondary" th:href="@{/{classe}/edit/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Editar</a>
+                    </td>
+                    <td>
+                        <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
+                           class="btn btn-outline-danger" th:href="@{/{classe}/remove/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Excluir</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

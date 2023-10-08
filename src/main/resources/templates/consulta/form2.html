@@ -57,7 +57,11 @@
                                     <tr class="pessoa-item" th:each="p : ${pacientes}">
                                         <td th:text="${p.nome}"></td>
                                         <td th:text="${p.cpf}"></td>
-                                        <td><a>Selecione</a></td>
+                                        <td><a href="#"
+                                               th:data-id="${p.id}"
+                                               th:data-nome="${p.nome}"
+                                               th:onclick="javascript:colocaPaciente(this.getAttribute('data-id'),this.getAttribute('data-nome'))">
+                                            Selecione</a></td>
                                     </tr>
                                 </table>
                             </div>
@@ -72,9 +76,10 @@
                 <div class="col-md-6">
                     <div class="input-group mb-3">
                         <div class="form-floating">
+                            <input class="form-control" type="hidden" th:field="*{medico.id}" id="medico_id">
                             <input type="text" class="form-control" placeholder="Nome do Médico"
-                                   aria-label="Recipient's username" aria-describedby="basic-addon" id="nome_medico">
-                            <label for="nome_medico">Nome do Médico</label>
+                                   aria-label="Recipient's username" aria-describedby="basic-addon" id="medico_nome">
+                            <label for="medico_nome">Nome do Médico</label>
                         </div>
 
                         <!-- Button trigger modal -->
@@ -107,6 +112,11 @@
                                     <tr th:each="m : ${medicos}">
                                         <td th:text="${m.nome}"></td>
                                         <td th:text="${m.crm}"></td>
+                                        <td><a href="#"
+                                               th:data-medico-id="${m.id}"
+                                               th:data-medico-nome="${m.nome}"
+                                               th:onclick="javascript:colocaMedico(this.getAttribute('data-medico-id'),this.getAttribute('data-medico-nome'))">
+                                            Selecione</a></td>
                                     </tr>
                                 </table>
                             </div>
@@ -117,25 +127,6 @@
                     </div>
                 </div>
 
-                <input class="form-control" type="hidden" th:field="*{paciente.id}">
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <select id="medico" name="medico" th:field="*{medico.id}" class="form-select">
-
-                            <option value="">Selecione...</option>
-
-                            <option th:each="m : ${medicos}"
-
-                                    th:value="${m.id}"
-
-                                    th:text="${m.nome}">
-
-                            </option>
-
-                        </select>
-                        <label for="medico">Nome do Médico</label>
-                    </div>
-                </div>
                 <div class="col-md-6">
                     <div class="form-floating">
                         <input class="form-control" id="data" type="datetime-local" th:field="*{data}"
@@ -163,13 +154,20 @@
     </div>
 
 
-    <script>
-        function colocaPaciente(id) {
+    <script th:inline="javascript">
+        function colocaPaciente(id, nome) {
             let pacId = document.getElementById("paciente_id");
             let pacNome = document.getElementById("paciente_nome");
-            pacId.value = id;
             pacNome.value = nome;
-            $('#exampleModal').modal('hide');
+            pacId.value = id;
+            document.getElementById('#exampleModal').hide();
+        }
+
+        function colocaMedico(id, nome) {
+            let medId = document.getElementById("medico_id");
+            let medNome = document.getElementById("medico_nome");
+            medNome.value = nome;
+            medId.value = id;
         }
     </script>
 

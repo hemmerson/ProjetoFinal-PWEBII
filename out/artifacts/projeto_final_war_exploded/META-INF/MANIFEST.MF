@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: "Hemmerson Luis Barros da Rosa"
+Build-Jdk: Oracle OpenJDK version 17.0.6
+Implementation-Title: projeto_final
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: br.edu.ifto
+Main-Class: ${start-class}
+

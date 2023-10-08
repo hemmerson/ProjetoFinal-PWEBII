@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
+    <title>Página Principal</title>
+</head>
+
+<body>
+
+<main>
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
+            <img th:src="@{/images/fotoCapa.jpeg}"/>
+        </div>
+    </div>
+</main>
+</body>
+</html>

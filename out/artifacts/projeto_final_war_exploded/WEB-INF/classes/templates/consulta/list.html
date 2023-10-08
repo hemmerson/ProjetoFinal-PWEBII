@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
+    <title>Lista de Médicos</title>
+</head>
+
+<body>
+<main>
+    <div class="container">
+        <h1>Lista de Consultas</h1>
+        <hr>
+        <h3 class="text-primary" th:if="${paciente != null }" th:text="'Paciente: '+${paciente.nome}"></h3>
+        <h3 class="text-primary" th:if="${medico != null }" th:text="'Médico: '+${medico.nome}"></h3>
+        <hr th:if="${paciente != null || medico != null}">
+        <h5 class="text-success" th:if="${paciente != null }"
+            th:text="'Total gasto com consultas: '+${#numbers.formatCurrency(paciente.totalConsultas())}"></h5>
+        <h5 class="text-success" th:if="${medico != null }"
+            th:text="'Total gerado com consultas: '+${#numbers.formatCurrency(medico.totalConsultas())}"></h5>
+        <h5 class="text-success" th:if="${totalConsultas != null }"
+            th:text="'Total das consultas: '+${#numbers.formatCurrency(totalConsultas)}"></h5>
+        <hr>
+        <a class="btn btn-outline-dark" th:href="@{/consultas/form}">Nova Consulta</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th th:if="${paciente == null }" th:text="'Paciente'"></th>
+                <th th:if="${medico == null }" th:text="'Médico'"></th>
+                <th>Data</th>
+                <th colspan="3">#Links</th>
+            </tr>
+            </thead>
+            <tr th:each="c : ${consultas}">
+                <td th:text="${c.id}"></td>
+                <td th:if="${paciente == null }" th:text="${c.paciente.nome}"></td>
+                <td th:if="${medico == null }" th:text="${c.medico.nome}"></td>
+                <td th:text="${#temporals.format(c.data, 'dd/MM/yyyy HH:mm')}"></td>
+                <td><a class="btn btn-outline-primary" th:href="@{/consultas/details/{id}(id=${c.id})}">Detalhes</a>
+                </td>
+                <td><a class="btn btn-outline-secondary" th:href="@{/consultas/edit/{id}(id=${c.id})}">Editar</a></td>
+                <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
+                       class="btn btn-outline-danger" th:href="@{/consultas/remove/{id}(id=${c.id})}">Excluir</a></td>
+            </tr>
+        </table>
+    </div>
+</main>
+
+</body>
+</html>
