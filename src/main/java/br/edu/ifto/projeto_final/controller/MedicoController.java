@@ -37,7 +37,7 @@ public class MedicoController {
     public ModelAndView listarConsultas(ModelMap model, @PathVariable("id") Long id) {
         model.addAttribute("consultas", repository.medico(id).getConsultas());
         model.addAttribute("medico", repository.medico(id));
-        return new ModelAndView("/pessoa/list", model);
+        return new ModelAndView("/consulta/list", model);
     }
 
     @PostMapping("/save")
