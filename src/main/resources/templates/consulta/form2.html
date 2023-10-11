@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <!-- Modal -->
+                <!-- Modal Paciente -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog">
@@ -47,6 +47,8 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <input type="text" class="form-control" placeholder="Pesquisar CPF" id="pesquisa_paciente">
+                                <hr />
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
@@ -60,7 +62,8 @@
                                         <td><a href="#"
                                                th:data-id="${p.id}"
                                                th:data-nome="${p.nome}"
-                                               th:onclick="javascript:colocaPaciente(this.getAttribute('data-id'),this.getAttribute('data-nome'))">
+                                               th:onclick="javascript:colocaPaciente(this.getAttribute('data-id'),this.getAttribute('data-nome'))"
+                                                data-bs-dismiss="modal">
                                             Selecione</a></td>
                                     </tr>
                                 </table>
@@ -91,7 +94,7 @@
                     </div>
                 </div>
 
-                <!-- Modal -->
+                <!-- Modal Médico -->
                 <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
                      aria-hidden="true">
                     <div class="modal-dialog">
@@ -102,6 +105,7 @@
                                         aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
@@ -115,7 +119,8 @@
                                         <td><a href="#"
                                                th:data-medico-id="${m.id}"
                                                th:data-medico-nome="${m.nome}"
-                                               th:onclick="javascript:colocaMedico(this.getAttribute('data-medico-id'),this.getAttribute('data-medico-nome'))">
+                                               th:onclick="javascript:colocaMedico(this.getAttribute('data-medico-id'),this.getAttribute('data-medico-nome'))"
+                                               data-bs-dismiss="modal">
                                             Selecione</a></td>
                                     </tr>
                                 </table>
@@ -154,22 +159,7 @@
     </div>
 
 
-    <script th:inline="javascript">
-        function colocaPaciente(id, nome) {
-            let pacId = document.getElementById("paciente_id");
-            let pacNome = document.getElementById("paciente_nome");
-            pacNome.value = nome;
-            pacId.value = id;
-            document.getElementById('#exampleModal').hide();
-        }
-
-        function colocaMedico(id, nome) {
-            let medId = document.getElementById("medico_id");
-            let medNome = document.getElementById("medico_nome");
-            medNome.value = nome;
-            medId.value = id;
-        }
-    </script>
+    <script th:inline="javascript" th:src="@{/js/codigo.js}"></script>
 
 
 </main>
