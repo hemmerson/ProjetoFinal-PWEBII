@@ -16,43 +16,122 @@
                   th:object="${consulta}"
                   method="post">
                 <input class="form-control" type="hidden" th:field="*{id}">
+
+<!--                Input para registrar o paciente, com o modal correspondente -->
                 <div class="col-md-6">
-                    <div class="form-floating">
-                        <select id="paciente" name="paciente" th:field="*{paciente.id}" class="form-select">
+                    <div class="input-group mb-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="hidden" th:field="*{paciente.id}" id="paciente_id">
+                            <input type="text" class="form-control" placeholder="Nome do Paciente" readonly
+                                   aria-label="Recipient's username" aria-describedby="basic-addon2" id="paciente_nome">
+                            <label for="paciente_nome">Nome do Paciente</label>
+                        </div>
 
-                            <option value="">Selecione...</option>
-
-                            <option th:each="p : ${pacientes}"
-
-                                    th:value="${p.id}"
-
-                                    th:text="${p.nome}">
-
-                            </option>
-
-                        </select>
-                        <label for="paciente">Nome do Paciente</label>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-secondary" id="basic-addon2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                            <span class="input-group-text" data-bs-target="#exampleModal"><i
+                                    class="bi bi-search"></i></span>
+                        </button>
                     </div>
                 </div>
-                <input class="form-control" type="hidden" th:field="*{paciente.id}">
-                <div class="col-md-6">
-                    <div class="form-floating">
-                        <select id="medico" name="medico" th:field="*{medico.id}" class="form-select">
 
-                            <option value="">Selecione...</option>
-
-                            <option th:each="m : ${medicos}"
-
-                                    th:value="${m.id}"
-
-                                    th:text="${m.nome}">
-
-                            </option>
-
-                        </select>
-                        <label for="medico">Nome do Médico</label>
+                <!-- Modal Paciente -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Lista de Pacientes</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="text" class="form-control" placeholder="Pesquisar CPF" id="pesquisa_paciente">
+                                <hr />
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                    </tr>
+                                    </thead>
+                                    <tr class="pessoa-item" th:each="p : ${pacientes}">
+                                        <td th:text="${p.nome}"></td>
+                                        <td th:text="${p.cpf}"></td>
+                                        <td><a href="#"
+                                               th:data-id="${p.id}"
+                                               th:data-nome="${p.nome}"
+                                               th:onclick="javascript:colocaPaciente(this.getAttribute('data-id'),this.getAttribute('data-nome'))"
+                                                data-bs-dismiss="modal">
+                                            Selecione</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!--                Input para registrar o médico, com o modal correspondente -->
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="hidden" th:field="*{medico.id}" id="medico_id">
+                            <input type="text" class="form-control" placeholder="Nome do Médico" readonly
+                                   aria-label="Recipient's username" aria-describedby="basic-addon" id="medico_nome">
+                            <label for="medico_nome">Nome do Médico</label>
+                        </div>
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-secondary" id="basic-addon" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal2">
+                            <span class="input-group-text" data-bs-target="#exampleModal2"><i
+                                    class="bi bi-search"></i></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal Médico -->
+                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel2">Lista de Médicos</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>CRM</th>
+                                    </tr>
+                                    </thead>
+                                    <tr th:each="m : ${medicos}">
+                                        <td th:text="${m.nome}"></td>
+                                        <td th:text="${m.crm}"></td>
+                                        <td><a href="#"
+                                               th:data-medico-id="${m.id}"
+                                               th:data-medico-nome="${m.nome}"
+                                               th:onclick="javascript:colocaMedico(this.getAttribute('data-medico-id'),this.getAttribute('data-medico-nome'))"
+                                               data-bs-dismiss="modal">
+                                            Selecione</a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-md-6">
                     <div class="form-floating">
                         <input class="form-control" id="data" type="datetime-local" th:field="*{data}"
@@ -78,6 +157,31 @@
             </form>
         </div>
     </div>
+
+
+    <script th:inline="javascript" th:src="@{/js/codigo.js}"></script>
+
+
+    <script>
+        // Função para filtrar pacientes com base no CPF digitado
+        function filtrarPacientes() {
+            var input = document.getElementById("pesquisa_paciente");
+            var filtro = input.value.toLowerCase();
+            var pacientes = document.querySelectorAll(".pessoa-item");
+
+            pacientes.forEach(function (paciente) {
+                var cpf = paciente.querySelector("td:nth-child(2)").textContent.toLowerCase();
+                if (cpf.includes(filtro)) {
+                    paciente.style.display = "";
+                } else {
+                    paciente.style.display = "none";
+                }
+            });
+        }
+
+        // Adicionar um ouvinte de evento ao campo de pesquisa
+        document.getElementById("pesquisa_paciente").addEventListener("input", filtrarPacientes);
+    </script>
 </main>
 </body>
 </html>

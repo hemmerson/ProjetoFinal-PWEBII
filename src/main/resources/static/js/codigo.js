@@ -3,6 +3,7 @@ function colocaPaciente(id, nome) {
     let pacNome = document.getElementById("paciente_nome");
     pacNome.value = nome;
     pacId.value = id;
+    document.getElementById("pesquisa_paciente").value = "";
 }
 
 function colocaMedico(id, nome) {
@@ -11,3 +12,4 @@ function colocaMedico(id, nome) {
     medNome.value = nome;
     medId.value = id;
 }
+

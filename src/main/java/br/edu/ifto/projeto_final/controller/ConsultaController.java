@@ -35,14 +35,14 @@ public class ConsultaController {
     public ModelAndView form(Consulta consulta, ModelMap model) {
         model.addAttribute("pacientes", pacienteRepository.pacientes());
         model.addAttribute("medicos", medicoRepository.medicos());
-        return new ModelAndView("/consulta/form", model);
+        return new ModelAndView("form1", model);
     }
 
     @GetMapping("/form2")
     public ModelAndView form2(Consulta consulta, ModelMap model) {
         model.addAttribute("pacientes", pacienteRepository.pacientes());
         model.addAttribute("medicos", medicoRepository.medicos());
-        return new ModelAndView("/consulta/form2", model);
+        return new ModelAndView("form", model);
     }
 
     @GetMapping("/list")
@@ -79,7 +79,7 @@ public class ConsultaController {
         model.addAttribute("pacientes", repository.consulta(id).getPaciente());
         model.addAttribute("medicos", repository.consulta(id).getMedico());
         model.addAttribute("consulta", repository.consulta(id));
-        return new ModelAndView("/consulta/form", model);
+        return new ModelAndView("form1", model);
     }
 
     @GetMapping("/details/{id}")
