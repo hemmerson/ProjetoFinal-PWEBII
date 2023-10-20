@@ -23,7 +23,9 @@
                         <div class="form-floating">
                             <input class="form-control" type="hidden" th:field="*{paciente.id}" id="paciente_id">
                             <input type="text" class="form-control" placeholder="Nome do Paciente" readonly
-                                   aria-label="Recipient's username" aria-describedby="basic-addon2" id="paciente_nome">
+                                   aria-label="Recipient's username" aria-describedby="basic-addon2" id="paciente_nome"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#exampleModal">
                             <label for="paciente_nome">Nome do Paciente</label>
                         </div>
 
@@ -161,24 +163,7 @@
 
     <script th:inline="javascript" th:src="@{/js/codigo.js}"></script>
 
-
     <script>
-        // Função para filtrar pacientes com base no CPF digitado
-        function filtrarPacientes() {
-            var input = document.getElementById("pesquisa_paciente");
-            var filtro = input.value.toLowerCase();
-            var pacientes = document.querySelectorAll(".pessoa-item");
-
-            pacientes.forEach(function (paciente) {
-                var cpf = paciente.querySelector("td:nth-child(2)").textContent.toLowerCase();
-                if (cpf.includes(filtro)) {
-                    paciente.style.display = "";
-                } else {
-                    paciente.style.display = "none";
-                }
-            });
-        }
-
         // Adicionar um ouvinte de evento ao campo de pesquisa
         document.getElementById("pesquisa_paciente").addEventListener("input", filtrarPacientes);
     </script>

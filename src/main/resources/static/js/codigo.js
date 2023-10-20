@@ -13,3 +13,18 @@ function colocaMedico(id, nome) {
     medId.value = id;
 }
 
+// Função para filtrar pacientes com base no CPF digitado
+function filtrarPacientes() {
+    var input = document.getElementById("pesquisa_paciente");
+    var filtro = input.value.toLowerCase();
+    var pacientes = document.querySelectorAll(".pessoa-item");
+
+    pacientes.forEach(function (paciente) {
+        var cpf = paciente.querySelector("td:nth-child(2)").textContent.toLowerCase();
+        if (cpf.includes(filtro)) {
+            paciente.style.display = "";
+        } else {
+            paciente.style.display = "none";
+        }
+    });
+}

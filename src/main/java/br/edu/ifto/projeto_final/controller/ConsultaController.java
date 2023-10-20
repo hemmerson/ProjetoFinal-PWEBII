@@ -31,18 +31,18 @@ public class ConsultaController {
     @Autowired
     MedicoRepository medicoRepository;
 
-    @GetMapping("/form")
-    public ModelAndView form(Consulta consulta, ModelMap model) {
-        model.addAttribute("pacientes", pacienteRepository.pacientes());
-        model.addAttribute("medicos", medicoRepository.medicos());
-        return new ModelAndView("form1", model);
-    }
-
     @GetMapping("/form2")
     public ModelAndView form2(Consulta consulta, ModelMap model) {
         model.addAttribute("pacientes", pacienteRepository.pacientes());
         model.addAttribute("medicos", medicoRepository.medicos());
-        return new ModelAndView("form", model);
+        return new ModelAndView("/consulta/form2", model);
+    }
+
+    @GetMapping("/form")
+    public ModelAndView form(Consulta consulta, ModelMap model) {
+        model.addAttribute("pacientes", pacienteRepository.pacientes());
+        model.addAttribute("medicos", medicoRepository.medicos());
+        return new ModelAndView("/consulta/form", model);
     }
 
     @GetMapping("/list")
