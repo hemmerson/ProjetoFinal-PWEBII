@@ -5,9 +5,11 @@ import br.edu.ifto.projeto_final.model.repository.ConsultaRepository;
 import br.edu.ifto.projeto_final.model.repository.MedicoRepository;
 import br.edu.ifto.projeto_final.model.repository.PacienteRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,7 +55,9 @@ public class ConsultaController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(Consulta consulta) {
+    public ModelAndView save(@Valid Consulta consulta, BindingResult result) {
+        if (result.hasErrors())
+            return new ModelAndView("/consulta/form");
         repository.save(consulta);
         return new ModelAndView("redirect:/consultas/list");
     }
@@ -79,7 +83,7 @@ public class ConsultaController {
         model.addAttribute("pacientes", repository.consulta(id).getPaciente());
         model.addAttribute("medicos", repository.consulta(id).getMedico());
         model.addAttribute("consulta", repository.consulta(id));
-        return new ModelAndView("form1", model);
+        return new ModelAndView("/consulta/form", model);
     }
 
     @GetMapping("/details/{id}")

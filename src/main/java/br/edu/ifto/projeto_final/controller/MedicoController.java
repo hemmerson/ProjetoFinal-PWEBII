@@ -4,9 +4,11 @@ import br.edu.ifto.projeto_final.model.entity.Pessoa;
 import br.edu.ifto.projeto_final.model.repository.MedicoRepository;
 import br.edu.ifto.projeto_final.model.entity.Medico;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -41,7 +43,9 @@ public class MedicoController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute("pessoa") Medico medico) {
+    public ModelAndView save(@ModelAttribute("pessoa") @Valid Medico medico, BindingResult result) {
+        if (result.hasErrors())
+            return new ModelAndView("/pessoa/form");
         repository.save(medico);
         return new ModelAndView("redirect:/medico/list");
     }

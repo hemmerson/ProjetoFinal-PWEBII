@@ -12,7 +12,7 @@
         <h1>Cadastrar Consulta</h1>
         <hr>
         <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
-            <form class="row g-3" th:action="${consulta.id == 0} ? @{/consultas/save} : @{/consultas/update}"
+            <form class="row g-3" th:action="${consulta.id == null} ? @{/consultas/save} : @{/consultas/update}"
                   th:object="${consulta}"
                   method="post">
                 <input class="form-control" type="hidden" th:field="*{id}">
@@ -21,12 +21,15 @@
                 <div class="col-md-6">
                     <div class="input-group mb-3">
                         <div class="form-floating">
-                            <input class="form-control" type="hidden" th:field="*{paciente.id}" id="paciente_id">
+                            <input class="form-control" type="hidden" th:field="*{paciente.id}" id="paciente_id" th:errorclass="is-invalid">
                             <input type="text" class="form-control" placeholder="Nome do Paciente" readonly
                                    aria-label="Recipient's username" aria-describedby="basic-addon2" id="paciente_nome"
                                    data-bs-toggle="modal"
-                                   data-bs-target="#exampleModal">
+                                   data-bs-target="#exampleModal" required
+                                   th:value="${#lists.size(pacientes) > 1 } ? '' : ${pacientes.nome}">
                             <label for="paciente_nome">Nome do Paciente</label>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('paciente.id')}" th:errors="*{paciente.id}"></div>
+
                         </div>
 
                         <!-- Button trigger modal -->
@@ -83,7 +86,10 @@
                         <div class="form-floating">
                             <input class="form-control" type="hidden" th:field="*{medico.id}" id="medico_id">
                             <input type="text" class="form-control" placeholder="Nome do Médico" readonly
-                                   aria-label="Recipient's username" aria-describedby="basic-addon" id="medico_nome">
+                                   aria-label="Recipient's username" aria-describedby="basic-addon" id="medico_nome"
+                                   data-bs-toggle="modal"
+                                   data-bs-target="#exampleModal2" required
+                                   th:value="${#lists.size(medicos) > 1} ? '' : ${medicos.nome}">
                             <label for="medico_nome">Nome do Médico</label>
                         </div>
 
@@ -137,14 +143,16 @@
                 <div class="col-md-6">
                     <div class="form-floating">
                         <input class="form-control" id="data" type="datetime-local" th:field="*{data}"
-                               placeholder="Data">
+                               placeholder="Data" th:errorclass="is-invalid">
                         <label for="data">Data</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" id="valor" type="number" th:field="*{valor}" placeholder="Valor">
+                        <input class="form-control" id="valor" type="number" th:field="*{valor}" placeholder="Valor" th:errorclass="is-invalid">
                         <label for="valor">Valor</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></div>
                     </div>
                 </div>
                 <div class="col-md-12">

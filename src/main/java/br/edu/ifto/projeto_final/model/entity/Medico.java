@@ -1,6 +1,7 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -15,6 +16,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id_pessoa")
 public class Medico extends Pessoa implements Serializable {
 
+    @NotBlank
     private String crm;
     private String especialidade;
 

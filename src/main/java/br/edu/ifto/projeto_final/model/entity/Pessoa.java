@@ -1,6 +1,8 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
@@ -18,8 +20,12 @@ public class Pessoa implements Serializable {
     @GeneratedValue(generator = "inc")
     @GenericGenerator(name = "inc", strategy = "increment")
     private Long id;
+    @NotBlank
     private String nome;
+    @NotBlank
+    @Email
     private String email;
+    @NotBlank
     private String telefone;
 
     public Long getId() {

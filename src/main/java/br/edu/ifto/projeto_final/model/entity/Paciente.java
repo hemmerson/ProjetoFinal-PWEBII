@@ -1,8 +1,11 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.List;
 @Entity
 @PrimaryKeyJoinColumn(name = "id_pessoa")
 public class Paciente extends Pessoa implements Serializable {
+    @NotBlank
+    @CPF
     private String cpf;
     private String planoSaude;
 
