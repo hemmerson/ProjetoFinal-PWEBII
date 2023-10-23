@@ -1,10 +1,7 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -20,8 +17,11 @@ public class Consulta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
+    @NotNull(message = "A data é obrigatória")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime data;
+    @NotNull
+    @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.")
     private Double valor;
     private String observacao;
     @ManyToOne

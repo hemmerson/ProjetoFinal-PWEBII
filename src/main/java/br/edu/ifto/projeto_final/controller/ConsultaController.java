@@ -80,8 +80,8 @@ public class ConsultaController {
      */
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("pacientes", repository.consulta(id).getPaciente());
-        model.addAttribute("medicos", repository.consulta(id).getMedico());
+        model.addAttribute("pac", repository.consulta(id).getPaciente());
+        model.addAttribute("med", repository.consulta(id).getMedico());
         model.addAttribute("consulta", repository.consulta(id));
         return new ModelAndView("/consulta/form", model);
     }

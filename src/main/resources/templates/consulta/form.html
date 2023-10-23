@@ -26,7 +26,7 @@
                                    aria-label="Recipient's username" aria-describedby="basic-addon2" id="paciente_nome"
                                    data-bs-toggle="modal"
                                    data-bs-target="#exampleModal" required
-                                   th:value="${#lists.size(pacientes) > 1 } ? '' : ${pacientes.nome}">
+                                   th:value="${pac != null} ? ${pac.nome} : ''">
                             <label for="paciente_nome">Nome do Paciente</label>
                             <div class="invalid-feedback" th:if="${#fields.hasErrors('paciente.id')}" th:errors="*{paciente.id}"></div>
 
@@ -89,7 +89,7 @@
                                    aria-label="Recipient's username" aria-describedby="basic-addon" id="medico_nome"
                                    data-bs-toggle="modal"
                                    data-bs-target="#exampleModal2" required
-                                   th:value="${#lists.size(medicos) > 1} ? '' : ${medicos.nome}">
+                                   th:value="${med != null} ? ${med.nome} : ''">
                             <label for="medico_nome">Nome do Médico</label>
                         </div>
 
