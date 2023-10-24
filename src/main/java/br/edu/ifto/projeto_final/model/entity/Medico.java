@@ -16,12 +16,12 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "id_pessoa")
 public class Medico extends Pessoa implements Serializable {
 
-    @NotBlank
+    @NotBlank(message = "Digite o CRM do médico")
     private String crm;
     private String especialidade;
 
     @OneToMany(mappedBy = "medico")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<Consulta> consultas;
 
     public String getCrm() {

@@ -18,13 +18,13 @@ import java.util.List;
 @Entity
 @PrimaryKeyJoinColumn(name = "id_pessoa")
 public class Paciente extends Pessoa implements Serializable {
-    @NotBlank
-    @CPF
+    @NotBlank(message = "Digite o CPF do paciente")
+    @CPF(message = "Digite um CPF válido")
     private String cpf;
     private String planoSaude;
 
     @OneToMany(mappedBy = "paciente")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<Consulta> consultas;
 
     public List<Consulta> getConsultas() {

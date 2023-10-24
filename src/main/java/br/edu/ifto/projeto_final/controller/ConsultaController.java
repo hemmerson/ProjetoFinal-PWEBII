@@ -55,9 +55,12 @@ public class ConsultaController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@Valid Consulta consulta, BindingResult result) {
-        if (result.hasErrors())
-            return new ModelAndView("/consulta/form");
+    public ModelAndView save(@Valid Consulta consulta, BindingResult result, ModelMap model) {
+        if (result.hasErrors()) {
+            model.addAttribute("pacientes", pacienteRepository.pacientes());
+            model.addAttribute("medicos", medicoRepository.medicos());
+            return new ModelAndView("/consulta/form", model);
+        }
         repository.save(consulta);
         return new ModelAndView("redirect:/consultas/list");
     }

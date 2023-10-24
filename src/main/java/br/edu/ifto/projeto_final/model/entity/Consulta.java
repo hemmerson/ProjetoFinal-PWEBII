@@ -2,6 +2,8 @@ package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -20,11 +22,13 @@ public class Consulta implements Serializable {
     @NotNull(message = "A data é obrigatória")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime data;
-    @NotNull
+    @NotNull(message = "Digite o valor da consulta")
     @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.")
     private Double valor;
+    @NotBlank(message = "Digite observações da consulta")
     private String observacao;
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Paciente paciente;
     @ManyToOne
     private Medico medico;

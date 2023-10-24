@@ -20,12 +20,12 @@ public class Pessoa implements Serializable {
     @GeneratedValue(generator = "inc")
     @GenericGenerator(name = "inc", strategy = "increment")
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Digite o nome")
     private String nome;
-    @NotBlank
-    @Email
+    @NotBlank(message = "Digite o email")
+    @Email(message = "Digite um email válido")
     private String email;
-    @NotBlank
+    @NotBlank(message = "Digite o telefone")
     private String telefone;
 
     public Long getId() {
