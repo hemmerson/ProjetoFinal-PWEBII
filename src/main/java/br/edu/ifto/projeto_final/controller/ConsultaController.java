@@ -4,12 +4,14 @@ import br.edu.ifto.projeto_final.model.entity.Consulta;
 import br.edu.ifto.projeto_final.model.repository.ConsultaRepository;
 import br.edu.ifto.projeto_final.model.repository.MedicoRepository;
 import br.edu.ifto.projeto_final.model.repository.PacienteRepository;
+import br.edu.ifto.projeto_final.model.validation.groups.Insert;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +57,7 @@ public class ConsultaController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@Valid Consulta consulta, BindingResult result, ModelMap model) {
+    public ModelAndView save(@Validated(Insert.class) Consulta consulta, BindingResult result, ModelMap model) {
         if (result.hasErrors()) {
             model.addAttribute("pacientes", pacienteRepository.pacientes());
             model.addAttribute("medicos", medicoRepository.medicos());
@@ -83,8 +85,8 @@ public class ConsultaController {
      */
     @GetMapping("/edit/{id}")
     public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("pac", repository.consulta(id).getPaciente());
-        model.addAttribute("med", repository.consulta(id).getMedico());
+        model.addAttribute("pacientes", repository.consulta(id).getPaciente());
+        model.addAttribute("medicos", repository.consulta(id).getMedico());
         model.addAttribute("consulta", repository.consulta(id));
         return new ModelAndView("/consulta/form", model);
     }
@@ -96,7 +98,12 @@ public class ConsultaController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(Consulta consulta) {
+    public ModelAndView update(@Validated(Insert.class) Consulta consulta, BindingResult result, ModelMap model) {
+        if (result.hasErrors()){
+            model.addAttribute("pacientes", pacienteRepository.pacientes());
+            model.addAttribute("medicos", medicoRepository.medicos());
+            return new ModelAndView("/consulta/form", model);
+        }
         repository.update(consulta);
         return new ModelAndView("redirect:/consultas/list");
     }

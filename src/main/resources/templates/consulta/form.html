@@ -12,31 +12,32 @@
         <h1>Cadastrar Consulta</h1>
         <hr>
         <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
-            <form class="row g-3 needs-validation" th:action="${consulta.id == null} ? @{/consultas/save} : @{/consultas/update}"
+            <form class="row g-3 needs-validation"
+                  th:action="${consulta.id == null} ? @{/consultas/save} : @{/consultas/update}"
                   th:object="${consulta}"
-                  method="post">
+                  method="post" novalidate>
                 <input class="form-control" type="hidden" th:field="*{id}">
 
                 <!--                Input para registrar o paciente, com o modal correspondente -->
-                <div class="col-md-6">
-                    <div class="input-group mb-3">
-                        <div class="form-floating">
-                            <input class="form-control" type="hidden" th:field="*{paciente.id}" id="paciente_id">
-                            <input type="text" class="form-control" placeholder="Nome do Paciente"
-                                   aria-describedby="basic-addon2" id="paciente_nome"
-                                   data-bs-toggle="modal" data-bs-target="#exampleModal" required
-                                   th:value="${pac != null} ? ${pac.nome} : ''">
-                            <label for="paciente_nome">Nome do Paciente</label>
-
-                        </div>
-
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-outline-secondary" id="basic-addon2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">
-                            <span class="input-group-text" data-bs-target="#exampleModal"><i
-                                    class="bi bi-search"></i></span>
-                        </button>
+                <div class="col-md-11">
+                    <div class="form-floating">
+                        <input type="hidden" th:field="*{paciente.id}" id="paciente_id">
+                        <input type="text" class="form-control" placeholder="Nome do Paciente"
+                               aria-describedby="basic-addon2" id="paciente_nome"
+                               data-bs-toggle="modal" data-bs-target="#exampleModal" required
+                               th:field="*{paciente.nome}" th:errorclass="is-invalid">
+                        <label for="paciente_nome">Nome do Paciente</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('paciente.nome')}"
+                             th:errors="*{paciente.nome}"></div>
                     </div>
+                </div>
+                <div class="col-md-1">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-secondary" id="basic-addon2"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <span class="input-group-text" data-bs-target="#exampleModal"><i
+                                        class="bi bi-search"></i></span>
+                    </button>
                 </div>
 
                 <!-- Modal Paciente -->
@@ -80,25 +81,26 @@
                 </div>
 
                 <!--                Input para registrar o médico, com o modal correspondente -->
-                <div class="col-md-6">
-                    <div class="input-group mb-3">
-                        <div class="form-floating">
-                            <input class="form-control" type="hidden" th:field="*{medico.id}" id="medico_id">
-                            <input type="text" class="form-control" placeholder="Nome do Médico"
-                                   aria-label="Recipient's username" aria-describedby="basic-addon" id="medico_nome"
-                                   data-bs-toggle="modal"
-                                   data-bs-target="#exampleModal2" required
-                                   th:value="${med != null} ? ${med.nome} : ''">
-                            <label for="medico_nome">Nome do Médico</label>
-                        </div>
+                <div class="col-md-11">
+                    <div class="form-floating">
+                        <input type="hidden" th:field="*{medico.id}" id="medico_id">
+                        <input type="text" class="form-control" placeholder="Nome do Médico"
+                               aria-label="Recipient's username" aria-describedby="basic-addon" id="medico_nome"
+                               data-bs-toggle="modal" data-bs-target="#exampleModal2" required
+                               th:field="*{medico.nome}" th:errorclass="is-invalid">
+                        <label for="medico_nome">Nome do Médico</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('medico.nome')}"
+                             th:errors="*{medico.nome}"></div>
+                    </div>
+                </div>
+                <div class="col-md-1">
 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-outline-secondary" id="basic-addon" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-secondary" id="basic-addon" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2">
                             <span class="input-group-text" data-bs-target="#exampleModal2"><i
                                     class="bi bi-search"></i></span>
-                        </button>
-                    </div>
+                    </button>
                 </div>
 
                 <!-- Modal Médico -->
@@ -149,7 +151,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" id="valor" type="number" th:field="*{valor}" placeholder="Valor"
+                        <input class="form-control" id="valor" type="text" th:field="*{valor}" placeholder="Valor"
                                th:errorclass="is-invalid">
                         <label for="valor">Valor</label>
                         <div class="invalid-feedback" th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}"></div>
@@ -160,15 +162,35 @@
                     <textarea class="form-control" id="observacao" th:field="*{observacao}" placeholder="Observação"
                               style="height: 200px" rows="5" th:errorclass="is-invalid"></textarea>
                         <label for="observacao">Observação</label>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}"></div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('observacao')}"
+                             th:errors="*{observacao}"></div>
                     </div>
                 </div>
                 <input class="btn btn-outline-primary" type="submit" value="Enviar">
                 <a th:href="@{/consultas/list}" class="btn btn-secondary">Lista</a>
+                <div th:each="erro : ${#fields.detailedErrors()}">
+                    <span th:text="${erro.fieldName}+' '+${erro.message}"></span>
+                </div>
             </form>
         </div>
     </div>
 
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--    <script src="/js/Inputmask-5.x/dist/jquery.inputmask.js"></script>-->
+<!--    <script>-->
+<!--        $(document).ready(function() {-->
+<!--            $("input[id*='valor']").inputmask({-->
+<!--                alias: 'numeric',-->
+<!--                groupSeparator: ',',-->
+<!--                autoGroup: true,-->
+<!--                digits: 2,-->
+<!--                digitsOptional: false,-->
+<!--                rightAlign: false,-->
+<!--                prefix: 'R$ ',-->
+<!--                placeholder: '0'-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
 
     <script th:inline="javascript" th:src="@{/js/codigo.js}"></script>
 

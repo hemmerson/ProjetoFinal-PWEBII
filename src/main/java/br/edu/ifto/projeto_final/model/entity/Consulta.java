@@ -1,6 +1,8 @@
 package br.edu.ifto.projeto_final.model.entity;
 
+import br.edu.ifto.projeto_final.model.validation.groups.Insert;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -19,18 +21,21 @@ public class Consulta implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
-    @NotNull(message = "A data é obrigatória")
+    @NotNull(message = "A data é obrigatória", groups = Insert.class)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime data;
-    @NotNull(message = "Digite o valor da consulta")
+    @NotNull(message = "Digite o valor da consulta", groups = Insert.class)
     @DecimalMin(value = "0.0", inclusive = false, message = "O valor deve ser maior que zero.")
     private Double valor;
-    @NotBlank(message = "Digite observações da consulta")
+    @NotBlank(message = "Digite observações da consulta", groups = Insert.class)
     private String observacao;
     @ManyToOne
+    @Valid
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Paciente paciente;
     @ManyToOne
+    @Valid
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Medico medico;
 
     public Long getId() {

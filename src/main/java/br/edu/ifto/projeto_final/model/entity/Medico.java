@@ -15,7 +15,6 @@ import java.util.List;
 @Entity
 @PrimaryKeyJoinColumn(name = "id_pessoa")
 public class Medico extends Pessoa implements Serializable {
-
     @NotBlank(message = "Digite o CRM do médico")
     private String crm;
     private String especialidade;

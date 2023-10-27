@@ -79,7 +79,9 @@ public class PacienteController {
     }
 
     @PostMapping("/update")
-    public ModelAndView update(Paciente paciente) {
+    public ModelAndView update(@ModelAttribute("pessoa") @Valid Paciente paciente, BindingResult result) {
+        if (result.hasErrors())
+            return new ModelAndView("/pessoa/form");
         repository.update(paciente);
         return new ModelAndView("redirect:/paciente/list");
     }

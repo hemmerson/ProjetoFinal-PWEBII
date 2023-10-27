@@ -1,8 +1,10 @@
 package br.edu.ifto.projeto_final.model.entity;
 
+import br.edu.ifto.projeto_final.model.validation.groups.Insert;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
@@ -15,12 +17,13 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Pessoa implements Serializable {
 
+    @NotNull(groups = Insert.class)
     @Id
     @Column(unique = true)
     @GeneratedValue(generator = "inc")
     @GenericGenerator(name = "inc", strategy = "increment")
     private Long id;
-    @NotBlank(message = "Digite o nome")
+    @NotBlank(message = "Digite o nome", groups = Insert.class)
     private String nome;
     @NotBlank(message = "Digite o email")
     @Email(message = "Digite um email válido")
