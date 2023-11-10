@@ -24,6 +24,7 @@ public class Pessoa implements Serializable {
     @GenericGenerator(name = "inc", strategy = "increment")
     private Long id;
     @NotBlank(message = "Digite o nome", groups = Insert.class)
+    @NotBlank(message = "Digite o nome")
     private String nome;
     @NotBlank(message = "Digite o email")
     @Email(message = "Digite um email válido")
