@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
     <title th:if="${pessoa[0].tipoObjeto('paciente')}">Lista de Pacientes</title>
@@ -40,11 +40,13 @@
                         <a class="btn btn-outline-success" th:href="@{/{classe}/details/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Detalhes</a>
                     </td>
                     <td>
-                        <a class="btn btn-outline-secondary" th:href="@{/{classe}/edit/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Editar</a>
+                        <a class="btn btn-outline-secondary" th:href="@{/{classe}/edit/{id}(classe=${p.nomeClasse()}, id=${p.id})}"
+                           sec:authorize="hasAnyRole('ADMIN')">Editar</a>
                     </td>
                     <td>
                         <a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
-                           class="btn btn-outline-danger" th:href="@{/{classe}/remove/{id}(classe=${p.nomeClasse()}, id=${p.id})}">Excluir</a>
+                           class="btn btn-outline-danger" th:href="@{/{classe}/remove/{id}(classe=${p.nomeClasse()}, id=${p.id})}"
+                           sec:authorize="hasAnyRole('ADMIN')">Excluir</a>
                     </td>
                 </tr>
             </table>

@@ -25,13 +25,16 @@ public class SecurityConfiguration {
                         customizer ->
                                 customizer
                                         .requestMatchers("/paciente/form").permitAll()
-                                        .requestMatchers("/paciente/list").hasAnyRole("ADMIN")
                                         .requestMatchers("/medico/form").hasAnyRole("ADMIN")
-                                        .requestMatchers("/medico/list").hasAnyRole("ADMIN")
-                                        .requestMatchers("/paciente/consultas/list").permitAll()
+                                        .requestMatchers("/paciente/consultas/{id}").permitAll()
+                                        .requestMatchers("/medico/*").hasAnyRole("ADMIN")
                                         .requestMatchers("/consultas/form").hasAnyRole("ADMIN")
                                         .requestMatchers(HttpMethod.POST,"/paciente/save").permitAll()
-                                        .requestMatchers(HttpMethod.POST,"/medico/save").hasAnyRole("ADMIN")
+                                        .requestMatchers(HttpMethod.POST,"/paciente/update").hasAnyRole("ADMIN")
+                                        .requestMatchers(HttpMethod.GET,"/paciente/remove/{id}").hasAnyRole("ADMIN")
+                                        .requestMatchers(HttpMethod.POST,"/consultas/save").hasAnyRole("ADMIN")
+                                        .requestMatchers(HttpMethod.POST,"/consultas/update").hasAnyRole("ADMIN")
+                                        .requestMatchers("/consultas/remove/{id}").hasAnyRole("ADMIN")
                                         .anyRequest() //define que a configuração é válida para qualquer requisição.
                                         .authenticated() //define que o usuário precisa estar autenticado.
                 )
