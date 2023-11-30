@@ -74,3 +74,24 @@ INSERT INTO consulta (valor, data, medico_id_pessoa, paciente_id_pessoa, observa
 
 -- Inserindo dados para a décima quinta consulta
 INSERT INTO consulta (valor, data, medico_id_pessoa, paciente_id_pessoa, observacao) VALUES (130.75, '2023-09-10 12:00:00', 6, 1, 'Consulta de acompanhamento');
+
+-- ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Criando ROLE ADMIN
+INSERT INTO role (id, nome) VALUES (1, 'ADMIN');
+
+-- Criando ROLE USER
+INSERT INTO role (id, nome) VALUES (2, 'USER');
+
+-- ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Criando usuario com login = admin
+INSERT INTO usuario (id, login, password) VALUES (1, 'admin', '$2a$10$tOi5F6t0yclgtf58gdsQC.76ddvKkLQzleFNWEQu9b92ik.VF0Ep.');
+
+-- Criando usuario com login = user
+INSERT INTO usuario (id, login, password) VALUES (2, 'user', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+
+-- ------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 1, 1 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 2, 2 );
