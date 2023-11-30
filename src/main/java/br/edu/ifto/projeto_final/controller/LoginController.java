@@ -1,5 +1,6 @@
 package br.edu.ifto.projeto_final.controller;
 
+import br.edu.ifto.projeto_final.model.entity.Medico;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;

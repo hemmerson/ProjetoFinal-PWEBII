@@ -78,10 +78,10 @@ INSERT INTO consulta (valor, data, medico_id_pessoa, paciente_id_pessoa, observa
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Criando ROLE ADMIN
-INSERT INTO role (id, nome) VALUES (1, 'ADMIN');
+INSERT INTO role (id, nome) VALUES (1, 'ROLE_ADMIN');
 
 -- Criando ROLE USER
-INSERT INTO role (id, nome) VALUES (2, 'USER');
+INSERT INTO role (id, nome) VALUES (2, 'ROLE_USER');
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------
 

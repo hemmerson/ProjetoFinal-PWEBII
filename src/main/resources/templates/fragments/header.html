@@ -38,7 +38,15 @@
                         <li><a class="dropdown-item" th:href="@{/consultas/list}">Listar</a></li>
                     </ul>
                 </div>
-                <form th:action="@{/logout}" method="post"><button class="btn btn-dark btn-lg" type="submit">Sair</button></form>
+                <div class="nav-item dropdown">
+                    <button class="btn btn-dark btn-lg" id="dropdown04" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        <i class="bi bi-people"></i> <span sec:authentication="name"></span> </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                        <li><form th:action="@{/logout}" method="post"><button class="dropdown-item" type="submit">Sair</button></form></li>
+                    </ul>
+                </div>
+<!--                <form th:action="@{/logout}" method="post"><button class="btn btn-dark btn-lg" type="submit">Sair</button></form>-->
             </div>
         </div>
     </nav>

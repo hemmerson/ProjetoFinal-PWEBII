@@ -1,4 +1,4 @@
-package br.edu.ifto.projeto_final;
+package br.edu.ifto.projeto_final.model.security;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
