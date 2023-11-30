@@ -1,6 +1,7 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Constraint;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,12 +20,13 @@ public class Usuario implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String login;
 
     private String password;
 
     @ManyToMany
-    private List<Role> roles = new ArrayList<>();
+    private List<Role> roles = new ArrayList();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

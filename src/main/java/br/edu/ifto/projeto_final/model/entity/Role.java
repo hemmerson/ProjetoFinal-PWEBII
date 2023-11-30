@@ -2,6 +2,7 @@ package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
  * on date 30/11/2023
  */
 
+@Component
 @Entity
 public class Role implements Serializable, GrantedAuthority {
     @Id
@@ -23,8 +25,10 @@ public class Role implements Serializable, GrantedAuthority {
     @ManyToMany(mappedBy = "roles")
     private List<Usuario> usuarios;
 
-    public Role(){ usuarios = new ArrayList<>();
+    public Role(){
+        usuarios = new ArrayList();
     }
+
     @Override
     public String getAuthority() {
         return nome;
