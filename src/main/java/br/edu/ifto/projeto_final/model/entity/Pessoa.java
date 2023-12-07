@@ -2,6 +2,7 @@ package br.edu.ifto.projeto_final.model.entity;
 
 import br.edu.ifto.projeto_final.model.validation.groups.Insert;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -31,6 +32,7 @@ public class Pessoa implements Serializable {
     private String email;
     @NotBlank(message = "Digite o telefone")
     private String telefone;
+
 
     public Long getId() {
         return id;

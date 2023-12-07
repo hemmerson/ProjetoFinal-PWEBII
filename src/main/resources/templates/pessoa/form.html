@@ -15,10 +15,10 @@
         <hr>
         <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
             <form class="row g-3 needs-validation" novalidate
-                  th:action="${pessoa.getId() == null} ? |/${pessoa.nomeClasse()}/save| : |/${pessoa.nomeClasse()}/update|" th:object="${pessoa}"
-                  method="post">
-<!--                <form th:action="|/${pessoa.nomeClasse()}/${pessoa.id == 0 ? 'save' : 'update'}|"-->
-<!--                      th:object="${pessoa}" method="post">-->
+                  th:action="${pessoa.getId() == null} ? |/${pessoa.nomeClasse()}/save| : |/${pessoa.nomeClasse()}/update|"
+                  th:object="${pessoa}" method="post">
+                <!--                <form th:action="|/${pessoa.nomeClasse()}/${pessoa.id == 0 ? 'save' : 'update'}|"-->
+                <!--                      th:object="${pessoa}" method="post">-->
 
                 <input class="form-control" type="hidden" th:field="*{id}">
                 <div class="col-md-6">
@@ -43,29 +43,58 @@
                         <input class="form-control" id="telefone" type="text" th:field="*{telefone}"
                                placeholder="Telefone" th:errorclass="is-invalid">
                         <label for="telefone">Telefone</label>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}"></div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('telefone')}"
+                             th:errors="*{telefone}"></div>
 
                     </div>
                 </div>
                 <hr/>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('paciente')}" id="cpf" th:field="*{cpf}" placeholder="CPF" th:errorclass="is-invalid">
-                        <div class="invalid-feedback" th:if="${pessoa.tipoObjeto('paciente')} and ${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></div>
+                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('paciente')}" id="cpf"
+                               th:field="*{cpf}" placeholder="CPF" th:errorclass="is-invalid">
+                        <div class="invalid-feedback"
+                             th:if="${pessoa.tipoObjeto('paciente')} and ${#fields.hasErrors('cpf')}"
+                             th:errors="*{cpf}"></div>
                         <label th:if="${pessoa.tipoObjeto('paciente')}" for="cpf">CPF</label>
-                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('medico')}" id="crm" th:field="*{crm}" placeholder="CRM" th:errorclass="is-invalid">
-                        <div class="invalid-feedback" th:if="${pessoa.tipoObjeto('medico')} and ${#fields.hasErrors('crm')} and ${pessoa.tipoObjeto('medico')}" th:errors="*{crm}"></div>
+                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('medico')}" id="crm"
+                               th:field="*{crm}" placeholder="CRM" th:errorclass="is-invalid">
+                        <div class="invalid-feedback"
+                             th:if="${pessoa.tipoObjeto('medico')} and ${#fields.hasErrors('crm')} and ${pessoa.tipoObjeto('medico')}"
+                             th:errors="*{crm}"></div>
                         <label th:if="${pessoa.tipoObjeto('medico')}" for="crm">CRM</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-floating">
-                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('paciente')}" id="plano" th:field="*{planoSaude}" placeholder="Plano de Saúde">
+                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('paciente')}" id="plano"
+                               th:field="*{planoSaude}" placeholder="Plano de Saúde">
                         <label th:if="${pessoa.tipoObjeto('paciente')}" for="plano">Plano de Saúde</label>
-                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('medico')}" id="especialidade" th:field="*{especialidade}" placeholder="Especialidade">
+                        <input class="form-control" type="text" th:if="${pessoa.tipoObjeto('medico')}"
+                               id="especialidade" th:field="*{especialidade}" placeholder="Especialidade">
                         <label th:if="${pessoa.tipoObjeto('medico')}" for="especialidade">Especialidade</label>
                     </div>
                 </div>
+
+                <div class="col-md-6" th:object="${usuario}">
+                    <div class="form-floating">
+                        <input class="form-control" id="login" type="text" th:field="*{login}" placeholder="Login"
+                               th:errorclass="is-invalid" required>
+                        <label for="login">Login</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('login')}"
+                             th:errors="*{login}"></div>
+                    </div>
+                </div>
+                <div class="col-md-6" th:object="${usuario}">
+                    <div class="form-floating">
+                        <input class="form-control" id="password" type="password" th:field="*{password}"
+                               placeholder="Password" th:errorclass="is-invalid">
+                        <label for="email">Password</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}"
+                             th:errors="*{password}"></div>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-outline-primary btn-lg">Enviar</button>
                 <a th:href="|/${pessoa.nomeClasse()}/list|" class="btn btn-secondary btn-lg">Lista</a>
             </form>

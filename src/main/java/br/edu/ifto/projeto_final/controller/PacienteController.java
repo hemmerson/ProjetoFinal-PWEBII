@@ -2,6 +2,7 @@ package br.edu.ifto.projeto_final.controller;
 
 import br.edu.ifto.projeto_final.model.entity.Medico;
 import br.edu.ifto.projeto_final.model.entity.Paciente;
+import br.edu.ifto.projeto_final.model.entity.Usuario;
 import br.edu.ifto.projeto_final.model.repository.PacienteRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -24,8 +25,9 @@ public class PacienteController {
     PacienteRepository repository;
 
     @GetMapping("/form")
-    public ModelAndView form(Paciente paciente, ModelMap model) {
+    public ModelAndView form(Paciente paciente, ModelMap model, Usuario usuario) {
         model.addAttribute("pessoa", paciente);
+        model.addAttribute("usuario", usuario);
         return new ModelAndView("/pessoa/form");
     }
 
@@ -43,10 +45,10 @@ public class PacienteController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute("pessoa") @Valid Paciente paciente, BindingResult result) {
+    public ModelAndView save(@ModelAttribute("pessoa") @Valid Paciente paciente, @ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result) {
         if (result.hasErrors())
              return new ModelAndView("/pessoa/form");
-        repository.save(paciente);
+        repository.save(paciente, usuario);
         return new ModelAndView("redirect:/paciente/list");
     }
 

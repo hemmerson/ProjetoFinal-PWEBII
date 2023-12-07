@@ -1,6 +1,7 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.annotations.OnDelete;
@@ -27,6 +28,21 @@ public class Paciente extends Pessoa implements Serializable {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<Consulta> consultas;
 
+    @Valid
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
+
+    public Paciente() {
+    }
+
+    public Paciente(String cpf, String planoSaude, List<Consulta> consultas) {
+        this.cpf = cpf;
+        this.planoSaude = planoSaude;
+        this.consultas = consultas;
+    }
+
+
     public List<Consulta> getConsultas() {
         return consultas;
     }
@@ -49,6 +65,14 @@ public class Paciente extends Pessoa implements Serializable {
 
     public void setPlanoSaude(String planoSaude) {
         this.planoSaude = planoSaude;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Double totalConsultas(){

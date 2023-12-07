@@ -1,32 +1,48 @@
+-- Criando usuario para as pessoas adicionadas anteriormente
+INSERT INTO usuario (id, login, password) VALUES (3, 'joao', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+INSERT INTO usuario (id, login, password) VALUES (4, 'maria', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+INSERT INTO usuario (id, login, password) VALUES (5, 'carlos', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+INSERT INTO usuario (id, login, password) VALUES (6, 'ana', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+INSERT INTO usuario (id, login, password) VALUES (7, 'rafael', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+
+-- Criando usuario para as pessoas adicionadas anteriormente
+INSERT INTO usuario (id, login, password) VALUES (8, 'drjoao', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+INSERT INTO usuario (id, login, password) VALUES (9, 'drmaria', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+INSERT INTO usuario (id, login, password) VALUES (10, 'drcarlos', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+INSERT INTO usuario (id, login, password) VALUES (11, 'drana', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+INSERT INTO usuario (id, login, password) VALUES (12, 'drrafael', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
+
+---------------------------------------------------------------------------------------------------------------------------------
+
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (1,'João Silva', 'joaosilva@email.com', '1234567890');
-INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (1, '222.111.333-21', 'GEAP');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude, usuario_id) VALUES (1, '222.111.333-21', 'GEAP', 3);
 
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (2,'Maria Santos', 'mariasantos@email.com', '9876543210');
-INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (2, '111.333.444-01', 'Bradesco Saúde');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude, usuario_id) VALUES (2, '111.333.444-01', 'Bradesco Saúde',4);
 
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (3,'Carlos Oliveira', 'carlosoliveira@email.com', '5555555555');
-INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (3, '555.444.666-99', 'UNIMED');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude, usuario_id) VALUES (3, '555.444.666-99', 'UNIMED',5);
 
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (4,'Ana Souza', 'anasouza@email.com', '7777777777');
-INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (4, '888.999.000.11', 'Hapvida');
+INSERT INTO paciente (id_pessoa, cpf, plano_saude, usuario_id) VALUES (4, '888.999.000.11', 'Hapvida',6);
 
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (5,'Rafael Pereira', 'rafaelpereira@email.com', '9999999999');
-INSERT INTO paciente (id_pessoa, cpf, plano_saude) VALUES (5, '333.222.111-00', 'GEAP');
--- ------------------------------------------------------------------------------
+INSERT INTO paciente (id_pessoa, cpf, plano_saude, usuario_id) VALUES (5, '333.222.111-00', 'GEAP',7);
+-- ----------------------------------------------------------------------------------------------------------------------------------------------------------
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (6,'Dr. João Santos', 'drjoaosantos@email.com', '918273645');
-INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (6, '12345', 'Geriatra');
+INSERT INTO medico (id_pessoa, crm, especialidade, usuario_id) VALUES (6, '12345', 'Geriatra',8);
 
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (7,'Dra. Maria Oliveira', 'drmariaoliveira@email.com', '654321234');
-INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (7, '54321', 'Clínico Geral');
+INSERT INTO medico (id_pessoa, crm, especialidade, usuario_id) VALUES (7, '54321', 'Clínico Geral',9);
 
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (8,'Dr. Carlos Silva', 'drcarlossilva@email.com', '423156788');
-INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (8, '98765', 'Oncologia');
+INSERT INTO medico (id_pessoa, crm, especialidade, usuario_id) VALUES (8, '98765', 'Oncologia',10);
 
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (9,'Dra. Ana Pereira', 'dranapereira@email.com', '876567821');
-INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (9, '67890', 'Pediatra');
+INSERT INTO medico (id_pessoa, crm, especialidade, usuario_id) VALUES (9, '67890', 'Pediatra',11);
 
 INSERT INTO pessoa (id, nome, email, telefone) VALUES (10,'Dr. Rafael Costa', 'drrafaelcosta@email.com', '231123223');
-INSERT INTO medico (id_pessoa, crm, especialidade) VALUES (10, '23456', 'Oftamologista');
+INSERT INTO medico (id_pessoa, crm, especialidade, usuario_id) VALUES (10, '23456', 'Oftamologista',12);
 
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -83,6 +99,12 @@ INSERT INTO role (id, nome) VALUES (1, 'ROLE_ADMIN');
 -- Criando ROLE USER
 INSERT INTO role (id, nome) VALUES (2, 'ROLE_USER');
 
+-- Criando ROLE PACIENTE
+INSERT INTO role (id, nome) VALUES (3, 'ROLE_PACIENTE');
+
+-- Criando ROLE MEDICO
+INSERT INTO role (id, nome) VALUES (4, 'ROLE_MEDICO');
+
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 -- Criando usuario com login = admin
@@ -91,7 +113,28 @@ INSERT INTO usuario (id, login, password) VALUES (1, 'admin', '$2a$10$tOi5F6t0yc
 -- Criando usuario com login = user
 INSERT INTO usuario (id, login, password) VALUES (2, 'user', '$2a$10$/mxyUb/49r/khlwfdYJW7.pB9maph6kGh8QBf5R5oVgSjjmlI6SLa');
 
+
+
 -- ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 1, 1 );
 INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 2, 2 );
+
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 3, 3 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 3, 4 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 3, 5 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 3, 6 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 3, 7 );
+
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 4, 8 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 4, 9 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 4, 10 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 4, 11 );
+INSERT INTO usuario_roles (roles_id, usuarios_id) VALUES ( 4, 12 );
+
+
+-- Crie uma sequência chamada "USUARIO_SEQ"
+CREATE SEQUENCE USUARIO_SEQ START WITH 13 INCREMENT BY 1;
+
+-- Altere a tabela USUARIO para usar a sequência como gerador de ID
+ALTER TABLE USUARIO ALTER COLUMN ID BIGINT DEFAULT NEXTVAL('USUARIO_SEQ');

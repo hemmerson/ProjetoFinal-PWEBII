@@ -1,11 +1,14 @@
 package br.edu.ifto.projeto_final.model.repository;
 
 import br.edu.ifto.projeto_final.model.entity.Paciente;
+import br.edu.ifto.projeto_final.model.entity.Role;
+import br.edu.ifto.projeto_final.model.entity.Usuario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +20,9 @@ public class PacienteRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public void save(Paciente paciente) {
+    public void save(Paciente paciente, Usuario usuario) {
+        em.persist(usuario);
+        paciente.setUsuario(usuario);
         em.persist(paciente);
     }
     public Paciente paciente(Long id) {

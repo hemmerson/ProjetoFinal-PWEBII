@@ -1,6 +1,7 @@
 package br.edu.ifto.projeto_final.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -22,6 +23,11 @@ public class Medico extends Pessoa implements Serializable {
     @OneToMany(mappedBy = "medico")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<Consulta> consultas;
+
+    @Valid
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public String getCrm() {
         return crm;
@@ -45,6 +51,14 @@ public class Medico extends Pessoa implements Serializable {
 
     public void setConsultas(List<Consulta> consultas) {
         this.consultas = consultas;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Double totalConsultas(){
