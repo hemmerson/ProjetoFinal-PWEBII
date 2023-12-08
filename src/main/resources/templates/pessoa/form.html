@@ -76,22 +76,22 @@
                     </div>
                 </div>
 
-                <div class="col-md-6" th:object="${usuario}">
+                <div class="col-md-6" th:if="${pessoa.getId() == null}">
                     <div class="form-floating">
-                        <input class="form-control" id="login" type="text" th:field="*{login}" placeholder="Login"
+                        <input class="form-control" id="login" type="text" th:field="*{usuario.login}" placeholder="Login"
                                th:errorclass="is-invalid" required>
                         <label for="login">Login</label>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('login')}"
-                             th:errors="*{login}"></div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('usuario.login')}"
+                             th:errors="*{usuario.login}"></div>
                     </div>
                 </div>
-                <div class="col-md-6" th:object="${usuario}">
+                <div class="col-md-6" th:if="${pessoa.getId() == null}">
                     <div class="form-floating">
-                        <input class="form-control" id="password" type="password" th:field="*{password}"
+                        <input class="form-control" id="password" type="password" th:field="*{usuario.password}"
                                placeholder="Password" th:errorclass="is-invalid">
                         <label for="email">Password</label>
-                        <div class="invalid-feedback" th:if="${#fields.hasErrors('password')}"
-                             th:errors="*{password}"></div>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('usuario.password')}"
+                             th:errors="*{usuario.password}"></div>
                     </div>
                 </div>
 

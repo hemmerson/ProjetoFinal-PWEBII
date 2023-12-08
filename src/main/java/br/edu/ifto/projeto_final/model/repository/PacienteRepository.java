@@ -20,22 +20,27 @@ public class PacienteRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public void save(Paciente paciente, Usuario usuario) {
-        em.persist(usuario);
-        paciente.setUsuario(usuario);
+    public void save(Paciente paciente) {
+        Role role = new Role();
+        role.setId(3L);
+        paciente.getUsuario().setRoles(role);
         em.persist(paciente);
     }
+
     public Paciente paciente(Long id) {
         return em.find(Paciente.class, id);
     }
+
     public List<Paciente> pacientes(){
         Query query = em.createQuery("from Paciente");
         return query.getResultList();
     }
+
     public void remove(Long id){
         Paciente p = em.find(Paciente.class,id);
         em.remove(p);
     }
+
     public void update(Paciente paciente){
         em.merge(paciente);
     }

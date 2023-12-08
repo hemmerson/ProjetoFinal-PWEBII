@@ -1,6 +1,7 @@
 package br.edu.ifto.projeto_final.model.repository;
 
 import br.edu.ifto.projeto_final.model.entity.Medico;
+import br.edu.ifto.projeto_final.model.entity.Role;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
@@ -18,11 +19,16 @@ public class MedicoRepository {
     private EntityManager em;
 
     public void save(Medico medico) {
+        Role role = new Role();
+        role.setId(4L);
+        medico.getUsuario().setRoles(role);
         em.persist(medico);
     }
+
     public Medico medico(Long id) {
         return em.find(Medico.class, id);
     }
+
     public List<Medico> medicos(){
         Query query = em.createQuery("from Medico");
         return query.getResultList();

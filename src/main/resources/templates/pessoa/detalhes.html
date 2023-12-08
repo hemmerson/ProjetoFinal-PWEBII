@@ -55,6 +55,13 @@
                         <label th:if="${pessoa.tipoObjeto('medico')}" for="especialidade">Especialidade</label>
                     </div>
                 </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input class="form-control" id="login" type="text" th:field="*{usuario.login}" placeholder="Login"
+                               th:errorclass="is-invalid" disabled>
+                        <label for="login">Login</label>
+                    </div>
+                </div>
                 <a th:href="|/${pessoa.nomeClasse()}/list|" class="btn btn-secondary btn-lg">Lista</a>
             </form>
         </div>

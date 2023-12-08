@@ -28,11 +28,6 @@ public class Paciente extends Pessoa implements Serializable {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<Consulta> consultas;
 
-    @Valid
-    @OneToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
     public Paciente() {
     }
 
@@ -41,7 +36,6 @@ public class Paciente extends Pessoa implements Serializable {
         this.planoSaude = planoSaude;
         this.consultas = consultas;
     }
-
 
     public List<Consulta> getConsultas() {
         return consultas;
@@ -65,14 +59,6 @@ public class Paciente extends Pessoa implements Serializable {
 
     public void setPlanoSaude(String planoSaude) {
         this.planoSaude = planoSaude;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Double totalConsultas(){

@@ -30,10 +30,8 @@ public class Usuario implements Serializable, UserDetails {
     private String password;
 
     @OneToOne(mappedBy = "usuario")
-    private Paciente paciente;
+    private Pessoa pessoa;
 
-    @OneToOne(mappedBy = "usuario")
-    private Medico medico;
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList();
 
@@ -92,27 +90,19 @@ public class Usuario implements Serializable, UserDetails {
         this.id = id;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Role role) {
+        this.roles.add(role);
     }
 }

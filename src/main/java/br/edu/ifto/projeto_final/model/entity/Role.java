@@ -34,7 +34,7 @@ public class Role implements Serializable, GrantedAuthority {
         return nome;
     }
 
-    public Long getId() {
+    public Long getId(long l) {
         return id;
     }
 

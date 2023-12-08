@@ -45,10 +45,10 @@ public class PacienteController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute("pessoa") @Valid Paciente paciente, @ModelAttribute("usuario") @Valid Usuario usuario, BindingResult result) {
+    public ModelAndView save(@ModelAttribute("pessoa") @Valid Paciente paciente, BindingResult result) {
         if (result.hasErrors())
              return new ModelAndView("/pessoa/form");
-        repository.save(paciente, usuario);
+        repository.save(paciente);
         return new ModelAndView("redirect:/paciente/list");
     }
 

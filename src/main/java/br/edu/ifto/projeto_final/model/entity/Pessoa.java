@@ -33,6 +33,10 @@ public class Pessoa implements Serializable {
     @NotBlank(message = "Digite o telefone")
     private String telefone;
 
+    @Valid
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public Long getId() {
         return id;
@@ -64,6 +68,14 @@ public class Pessoa implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public boolean tipoObjeto(String objeto){
