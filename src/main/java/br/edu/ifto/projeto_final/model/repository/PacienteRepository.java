@@ -2,10 +2,13 @@ package br.edu.ifto.projeto_final.model.repository;
 
 import br.edu.ifto.projeto_final.model.entity.Paciente;
 import br.edu.ifto.projeto_final.model.entity.Role;
+import br.edu.ifto.projeto_final.model.entity.RolesEnum;
 import br.edu.ifto.projeto_final.model.entity.Usuario;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -22,13 +25,20 @@ public class PacienteRepository {
 
     public void save(Paciente paciente) {
         Role role = new Role();
-        role.setId(3L);
+        role.setId(RolesEnum.ROLE_PACIENTE.getRoleId());
         paciente.getUsuario().setRoles(role);
         em.persist(paciente);
     }
 
     public Paciente paciente(Long id) {
         return em.find(Paciente.class, id);
+    }
+
+    public Paciente paciente(String auth) {
+        String sql = "select p from Paciente p JOIN p.usuario u where u.login = :login";
+        TypedQuery<Paciente> query = em.createQuery(sql, Paciente.class);
+        query.setParameter("login", auth);
+        return query.getSingleResult();
     }
 
     public List<Paciente> pacientes(){
@@ -46,3 +56,4 @@ public class PacienteRepository {
     }
 
 }
+

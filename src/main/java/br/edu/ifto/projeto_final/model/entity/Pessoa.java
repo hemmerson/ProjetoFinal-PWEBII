@@ -85,4 +85,15 @@ public class Pessoa implements Serializable {
     public String nomeClasse(){
         return this.getClass().getSimpleName().toLowerCase();
     }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", usuario=" + usuario +
+                '}';
+    }
 }

@@ -68,4 +68,13 @@ public class Paciente extends Pessoa implements Serializable {
         }
         return total;
     }
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "cpf='" + cpf + '\'' +
+                ", planoSaude='" + planoSaude + '\'' +
+                ", consultas=" + consultas +
+                '}';
+    }
 }

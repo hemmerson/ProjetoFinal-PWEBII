@@ -6,6 +6,8 @@ import br.edu.ifto.projeto_final.model.entity.Medico;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -39,6 +41,14 @@ public class MedicoController {
     public ModelAndView listarConsultas(ModelMap model, @PathVariable("id") Long id) {
         model.addAttribute("consultas", repository.medico(id).getConsultas());
         model.addAttribute("medico", repository.medico(id));
+        return new ModelAndView("/consulta/list", model);
+    }
+
+    @GetMapping("/consultas")
+    public ModelAndView listarConsultasPaciente(ModelMap model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("consultas", repository.medico(auth.getName()).getConsultas());
+        model.addAttribute("medico", repository.medico(auth.getName()));
         return new ModelAndView("/consulta/list", model);
     }
 
