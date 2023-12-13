@@ -21,7 +21,7 @@
         <h5 class="text-success" th:if="${totalConsultas != null }"
             th:text="'Total das consultas: '+${#numbers.formatCurrency(totalConsultas)}"></h5>
         <hr>
-        <a class="btn btn-outline-dark" th:href="@{/consultas/form}" sec:authorize="hasAnyRole('ADMIN')">Nova Consulta</a>
+        <a class="btn btn-outline-dark" th:href="@{/consultas/form}" sec:authorize="hasAnyRole('ADMIN', 'MEDICO')">Nova Consulta</a>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -39,7 +39,7 @@
                 <td th:text="${#temporals.format(c.data, 'dd/MM/yyyy HH:mm')}"></td>
                 <td><a class="btn btn-outline-primary" th:href="@{/consultas/details/{id}(id=${c.id})}">Detalhes</a>
                 </td>
-                <td><a class="btn btn-outline-secondary" th:href="@{/consultas/edit/{id}(id=${c.id})}" sec:authorize="hasAnyRole('ADMIN')">Editar</a></td>
+                <td><a class="btn btn-outline-secondary" th:href="@{/consultas/edit/{id}(id=${c.id})}" sec:authorize="hasAnyRole('ADMIN', 'MEDICO')">Editar</a></td>
                 <td><a onclick="return window.confirm('Tem certeza que deseja excluir este registro?')"
                        class="btn btn-outline-danger" th:href="@{/consultas/remove/{id}(id=${c.id})}" sec:authorize="hasAnyRole('ADMIN')">Excluir</a></td>
             </tr>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="~{fragments/head :: head(~{::title},~{})}">
     <title th:if="${pessoa.tipoObjeto('paciente')}">Detalhes do Paciente</title>
@@ -62,6 +62,8 @@
                         <label for="login">Login</label>
                     </div>
                 </div>
+                <a class="btn btn-outline-secondary" th:href="@{/{classe}/edit/{id}(classe=${pessoa.nomeClasse()}, id=${pessoa.id})}"
+                   sec:authorize="hasAnyRole('MEDICO')">Editar</a>
                 <a th:href="|/${pessoa.nomeClasse()}/list|" class="btn btn-secondary btn-lg">Lista</a>
             </form>
         </div>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
     <title>Detalhes da Consulta</title>
@@ -50,6 +50,7 @@
                         <label for="observacao">Observação</label>
                     </div>
                 </div>
+                <a class="btn btn-outline-secondary" th:href="@{/consultas/edit/{id}(id=${consulta.id})}" sec:authorize="hasAnyRole('ADMIN', 'MEDICO')">Editar</a>
                 <a th:href="@{/consultas/list}" class="btn btn-secondary btn-lg">Lista</a>
             </form>
         </div>

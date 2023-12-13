@@ -27,15 +27,18 @@ public class SecurityConfiguration {
                         customizer ->
                                 customizer
                                         .requestMatchers("/paciente/form").permitAll()
-                                        .requestMatchers("/medico/form").hasAnyRole("ADMIN")
-                                        .requestMatchers("/paciente/consultas/{id}").permitAll()
-                                        .requestMatchers("/medico/*").hasAnyRole("ADMIN")
-                                        .requestMatchers("/consultas/form").hasAnyRole("ADMIN")
+                                        .requestMatchers("/paciente/list").hasAnyRole("ADMIN", "USER", "MEDICO")
+                                        .requestMatchers("/medico/form").hasAnyRole("ADMIN","MEDICO")
+                                        .requestMatchers("/paciente/consultas/{id}").hasAnyRole("ADMIN", "USER")
+                                        .requestMatchers("/paciente/consultas").hasAnyRole("PACIENTE")
+                                        .requestMatchers("/medico/*").hasAnyRole("ADMIN", "MEDICO")
+                                        .requestMatchers("/consultas/form").hasAnyRole("ADMIN", "USER", "MEDICO")
+                                        .requestMatchers("/consultas/list").hasAnyRole("ADMIN", "USER")
                                         .requestMatchers(HttpMethod.POST,"/paciente/save").permitAll()
-                                        .requestMatchers(HttpMethod.POST,"/paciente/update").hasAnyRole("ADMIN")
+                                        .requestMatchers(HttpMethod.POST,"/paciente/update").hasAnyRole("ADMIN", "USER", "MEDICO")
                                         .requestMatchers(HttpMethod.GET,"/paciente/remove/{id}").hasAnyRole("ADMIN")
-                                        .requestMatchers(HttpMethod.POST,"/consultas/save").hasAnyRole("ADMIN")
-                                        .requestMatchers(HttpMethod.POST,"/consultas/update").hasAnyRole("ADMIN")
+                                        .requestMatchers(HttpMethod.POST,"/consultas/save").hasAnyRole("ADMIN", "MEDICO")
+                                        .requestMatchers(HttpMethod.POST,"/consultas/update").hasAnyRole("ADMIN", "MEDICO")
                                         .requestMatchers("/consultas/remove/{id}").hasAnyRole("ADMIN")
                                         .anyRequest() //define que a configuração é válida para qualquer requisição.
                                         .authenticated() //define que o usuário precisa estar autenticado.

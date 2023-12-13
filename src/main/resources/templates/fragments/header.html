@@ -22,7 +22,7 @@
                         <li><a class="dropdown-item" th:href="@{/paciente/list}">Listar</a></li>
                     </ul>
                 </div>
-                <div class="nav-item dropdown" sec:authorize="hasAnyRole('ADMIN')">
+                <div class="nav-item dropdown" sec:authorize="hasAnyRole('ADMIN', 'USER')">
                     <button class="btn btn-dark btn-lg dropdown-toggle" id="dropdown02" data-bs-toggle="dropdown"
                             aria-expanded="false">Médicos</button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown02">
@@ -34,8 +34,10 @@
                     <button class="btn btn-dark btn-lg dropdown-toggle" id="dropdown03" data-bs-toggle="dropdown"
                        aria-expanded="false">Consultas</button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown03">
-                        <li><a class="dropdown-item" th:href="@{/consultas/form}" sec:authorize="hasAnyRole('ADMIN')">Cadastrar</a></li>
-                        <li><a class="dropdown-item" th:href="@{/consultas/list}">Listar</a></li>
+                        <li><a class="dropdown-item" th:href="@{/consultas/form}" sec:authorize="hasAnyRole('ADMIN','USER', 'MEDICO')">Cadastrar</a></li>
+                        <li><a class="dropdown-item" th:href="@{/consultas/list}" sec:authorize="hasAnyRole('ADMIN','USER')">Listar</a></li>
+                        <li sec:authorize="hasAnyRole('PACIENTE')"><a class="dropdown-item" th:href="@{/paciente/consultas}">Listar</a></li>
+                        <li sec:authorize="hasAnyRole('MEDICO')"><a class="dropdown-item" th:href="@{/medico/consultas}">Listar</a></li>
                     </ul>
                 </div>
                 <div class="nav-item dropdown">
@@ -43,6 +45,8 @@
                             aria-expanded="false">
                         <i class="bi bi-people"></i> <span sec:authentication="name"></span> </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                        <li sec:authorize="hasAnyRole('MEDICO')"><a class="dropdown-item" th:href="@{/medico/details}">Meus Dados</a></li>
+                        <li sec:authorize="hasAnyRole('PACIENTE')"><a class="dropdown-item" th:href="@{/paciente/details}">Meus Dados</a></li>
                         <li><form th:action="@{/logout}" method="post"><button class="dropdown-item" type="submit">Sair</button></form></li>
                     </ul>
                 </div>

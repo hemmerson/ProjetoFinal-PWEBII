@@ -95,4 +95,11 @@ public class MedicoController {
         model.addAttribute("pessoa", repository.medico(id));
         return new ModelAndView("/pessoa/detalhes", model);
     }
+
+    @GetMapping("/details")
+    public ModelAndView details(ModelMap model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("pessoa", repository.medico(auth.getName()));
+        return new ModelAndView("/pessoa/detalhes", model);
+    }
 }
