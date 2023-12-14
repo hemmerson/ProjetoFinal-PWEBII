@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
+    <title>Agendamento de Consulta Médica</title>
+</head>
+
+<body>
+<main>
+    <div class="container">
+        <h1>Agendamento</h1>
+        <hr>
+        <div class="row mt-5">
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input class="form-control form-control-lg" id="data" type="text"
+                           th:field="*{agendamento.data}" disabled>
+                    <label for="data">Data</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input class="form-control form-control-lg" id="nome_medico" type="text"
+                           th:field="*{agendamento.medico.nome}"
+                           disabled>
+                    <label for="nome_medico">Nome do Médico</label>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Horário</th>
+                <th>Status</th>
+                <th>Paciente</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th colspan="2">#Links</th>
+            </tr>
+            </thead>
+            <tr th:each="a : ${agendamento.horarios}" th:class="${a.status == 'Disponível'} ? 'table-success ': 'table-danger'">
+                <td th:text="${a.horario}"></td>
+                <td th:text="${a.status}"></td>
+                <td th:text="${a.nomePaciente}"></td>
+                <td th:text="${a.telefonePaciente}"></td>
+                <td th:text="${a.emailPaciente}"></td>
+<!--                <td><a class="btn btn-outline-secondary" th:href="@{/consultas/edit/{id}(id=${c.id})}"-->
+<!--                       sec:authorize="hasAnyRole('ADMIN', 'MEDICO', 'USER')">Editar</a></td>-->
+            </tr>
+        </table>
+        <a class="btn btn-secondary" th:href="@{/agendamento/form}">Voltar</a>
+    </div>
+</main>
+</body>
+</html>

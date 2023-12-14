@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}">
+
+<head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
+    <title>Disponibilidade de Consulta Médica</title>
+</head>
+
+<body>
+<main>
+    <div class="container">
+        <h1>Agendamento de Consultas</h1>
+        <hr>
+        <form class="row g-3" method="post" th:object="${agendamento}" th:action="@{/agendamento/list}">
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <input class="form-control" type="date" name="dataAgendamento" id="dataAgendamento">
+                    <label for="dataAgendamento">Data</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-floating">
+                    <select id="medico" name="medico" th:field="*{medico.id}" class="form-select">
+
+                        <option value="">Selecione...</option>
+
+                        <option th:each="m : ${medicos}"
+
+                                th:value="${m.id}"
+
+                                th:text="${m.nome}">
+
+                        </option>
+
+                    </select>
+                    <label for="medico">Nome do Médico</label>
+                </div>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Selecionar">
+        </form>
+    </div>
+</main>
+</body>
+</html>

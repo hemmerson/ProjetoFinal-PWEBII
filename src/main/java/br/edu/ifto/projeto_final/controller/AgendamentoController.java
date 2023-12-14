@@ -69,22 +69,24 @@ public class AgendamentoController {
         return new ModelAndView("/index");
     }
 
-//    /**
-//     * @param id
-//     * @return
-//     * @PathVariable é utilizado quando o valor da variável é passada diretamente na URL
-//     */
-//    @GetMapping("/remove/{id}")
-//    public ModelAndView remove(@PathVariable("id") Long id) {
-//        repository.remove(id);
-//        return new ModelAndView("redirect:/consultas/list");
-//    }
-//
-//    /**
-//     * @param id
-//     * @return
-//     * @PathVariable é utilizado quando o valor da variável é passada diretamente na URL
-//     */
+    @GetMapping("/form")
+    public ModelAndView escolha(Agendamento agendamento, ModelMap model) {
+        model.addAttribute("medicos", medicoRepository.medicos());
+        return new ModelAndView("/agendamento/escolhe", model);
+    }
+
+    @PostMapping("/list")
+    public ModelAndView listar(@RequestParam("dataAgendamento") String data,
+                               @RequestParam("medico.id") Long medico, ModelMap model) {
+        System.out.println(data);
+        System.out.println(medico);
+        LocalDate dataBusca = LocalDate.parse(data);
+        Medico m = medicoRepository.medico(medico);
+        model.addAttribute("agendamento", repository.agendamento(dataBusca,m));
+        return new ModelAndView("/agendamento/agendamento", model);
+    }
+
+
 //    @GetMapping("/edit/{id}")
 //    public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
 //        model.addAttribute("pacientes", repository.consulta(id).getPaciente());
