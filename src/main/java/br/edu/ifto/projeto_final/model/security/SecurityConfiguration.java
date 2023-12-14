@@ -27,6 +27,7 @@ public class SecurityConfiguration {
                         customizer ->
                                 customizer
                                         .requestMatchers("/paciente/form").permitAll()
+                                        .requestMatchers("/agendamento/*").hasAnyRole("ADMIN", "MEDICO")
                                         .requestMatchers("/paciente/list").hasAnyRole("ADMIN", "USER", "MEDICO")
                                         .requestMatchers("/medico/form").hasAnyRole("ADMIN","MEDICO")
                                         .requestMatchers("/paciente/consultas/{id}").hasAnyRole("ADMIN", "USER")

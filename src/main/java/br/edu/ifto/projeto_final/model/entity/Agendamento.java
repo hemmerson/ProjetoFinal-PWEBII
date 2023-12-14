@@ -5,6 +5,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,6 @@ public class Agendamento implements Serializable {
 
     @FutureOrPresent
     private LocalDate data;
-    private boolean disponivel;
 
     @ManyToOne
     private Medico medico;
@@ -31,16 +31,14 @@ public class Agendamento implements Serializable {
     public Agendamento() {
     }
 
-    public Agendamento(Long id, LocalDate data, boolean disponivel) {
+    public Agendamento(Long id, LocalDate data) {
         this.id = id;
         this.data = data;
-        this.disponivel = disponivel;
     }
 
-    public Agendamento(Long id, LocalDate data, boolean disponivel, Medico medico, List<Horario> horarios) {
+    public Agendamento(Long id, LocalDate data, Medico medico, List<Horario> horarios) {
         this.id = id;
         this.data = data;
-        this.disponivel = disponivel;
         this.medico = medico;
         this.horarios = horarios;
     }
@@ -59,14 +57,6 @@ public class Agendamento implements Serializable {
 
     public void setData(LocalDate data) {
         this.data = data;
-    }
-
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
     }
 
     public List<Horario> getHorarios() {

@@ -4,10 +4,7 @@ import br.edu.ifto.projeto_final.model.entity.Agendamento;
 import br.edu.ifto.projeto_final.model.entity.Consulta;
 import br.edu.ifto.projeto_final.model.entity.Horario;
 import br.edu.ifto.projeto_final.model.entity.Medico;
-import br.edu.ifto.projeto_final.model.repository.AgendamentoRepository;
-import br.edu.ifto.projeto_final.model.repository.ConsultaRepository;
-import br.edu.ifto.projeto_final.model.repository.MedicoRepository;
-import br.edu.ifto.projeto_final.model.repository.PacienteRepository;
+import br.edu.ifto.projeto_final.model.repository.*;
 import br.edu.ifto.projeto_final.model.validation.groups.Insert;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +36,9 @@ public class AgendamentoController {
     @Autowired
     MedicoRepository medicoRepository;
 
+    @Autowired
+    HorarioRepository horarioRepository;
+
     @GetMapping("/disponibilidade")
     public ModelAndView form(Agendamento agendamento, ModelMap model) {
         model.addAttribute("horarios", agendamento.getHorarios());
@@ -47,25 +47,26 @@ public class AgendamentoController {
     }
 
     @PostMapping("/save")
-    @ResponseBody
-    public ModelAndView save(@RequestParam("dataSeleciona") String dataSelecionada,
-                             @RequestParam("horariosSelecionados")List<String> horariosSelecionados) {
+    public ModelAndView save(@RequestParam("dataSelect") String dataSelecionada,
+                             @RequestParam("horarioSelect")List<String> horariosSelecionados) {
         List<Horario> horarios = new ArrayList<>();
+        Agendamento agendamento = new Agendamento();
         for (String horario : horariosSelecionados){
             Horario h = new Horario();
             h.setHorario(LocalTime.parse(horario));
+            h.setStatus("Disponível");
+            h.setAgendamento(agendamento);
+            horarioRepository.save(h);
             horarios.add(h);
         }
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Medico m = medicoRepository.medico(auth.getName());
-
-        Agendamento agendamento = new Agendamento();
+        System.out.println(LocalDate.parse(dataSelecionada));
         agendamento.setData(LocalDate.parse(dataSelecionada));
         agendamento.setHorarios(horarios);
         agendamento.setMedico(m);
         repository.save(agendamento);
-        return new ModelAndView("redirect:/consultas/list");
+        return new ModelAndView("/index");
     }
 
 //    /**

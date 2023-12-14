@@ -41,10 +41,17 @@
                     </ul>
                 </div>
                 <div class="nav-item dropdown">
-                    <button class="btn btn-dark btn-lg" id="dropdown04" data-bs-toggle="dropdown"
+                    <button class="btn btn-dark btn-lg dropdown-toggle" id="dropdown04" data-bs-toggle="dropdown"
+                            aria-expanded="false">Agendamento</button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                        <li sec:authorize="hasAnyRole('MEDICO')"><a class="dropdown-item" th:href="@{/agendamento/disponibilidade}">Disponibilizar</a></li>
+                    </ul>
+                </div>
+                <div class="nav-item dropdown">
+                    <button class="btn btn-dark btn-lg" id="dropdown05" data-bs-toggle="dropdown"
                             aria-expanded="false">
                         <i class="bi bi-people"></i> <span sec:authentication="name"></span> </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown04">
+                    <ul class="dropdown-menu" aria-labelledby="dropdown05">
                         <li sec:authorize="hasAnyRole('MEDICO')"><a class="dropdown-item" th:href="@{/medico/details}">Meus Dados</a></li>
                         <li sec:authorize="hasAnyRole('PACIENTE')"><a class="dropdown-item" th:href="@{/paciente/details}">Meus Dados</a></li>
                         <li><form th:action="@{/logout}" method="post"><button class="dropdown-item" type="submit">Sair</button></form></li>

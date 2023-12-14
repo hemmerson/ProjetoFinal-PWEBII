@@ -19,7 +19,7 @@ public class Horario implements Serializable {
     private String nomePaciente;
     private String telefonePaciente;
     private String emailPaciente;
-    private String status = "Indisponível";
+    private String status;
 
     @ManyToOne
     private Agendamento agendamento;
@@ -32,7 +32,7 @@ public class Horario implements Serializable {
         this.nomePaciente = nomePaciente;
         this.telefonePaciente = telefonePaciente;
         this.emailPaciente = emailPaciente;
-        this.status = status;
+        this.status=status;
     }
 
     public Horario(Long id, LocalTime horario, String nomePaciente, String telefonePaciente, String emailPaciente, String status, Agendamento agendamento) {
@@ -41,7 +41,7 @@ public class Horario implements Serializable {
         this.nomePaciente = nomePaciente;
         this.telefonePaciente = telefonePaciente;
         this.emailPaciente = emailPaciente;
-        this.status = status;
+        this.status=status;
         this.agendamento = agendamento;
     }
 
