@@ -21,7 +21,7 @@ public class Horario implements Serializable {
     private String emailPaciente;
     private String status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Agendamento agendamento;
     public Horario() {
     }
