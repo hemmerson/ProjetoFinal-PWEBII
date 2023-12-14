@@ -7,6 +7,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +24,9 @@ public class Medico extends Pessoa implements Serializable {
     @OneToMany(mappedBy = "medico")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private List<Consulta> consultas;
+
+    @OneToMany(mappedBy = "medico")
+    private List<Agendamento> agendamentos = new ArrayList<>();
 
     public String getCrm() {
         return crm;
@@ -46,6 +50,14 @@ public class Medico extends Pessoa implements Serializable {
 
     public void setConsultas(List<Consulta> consultas) {
         this.consultas = consultas;
+    }
+
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
     }
 
     public Double totalConsultas(){
