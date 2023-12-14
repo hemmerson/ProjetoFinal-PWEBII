@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html th:replace="~{fragments/layout :: layout(~{::head},~{::main})}" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<head th:replace="~{fragments/head :: head(~{::title}, ~{})}">
+    <title>Agendamento de Consulta Médica</title>
+</head>
+
+<body>
+<main>
+    <div class="container h-custom">
+        <h1>Agendamento de Pacientes</h1>
+        <hr>
+        <div class="row d-flex justify-content-center align-items-center h-100 mb-5">
+            <form class="row g-3 needs-validation" novalidate
+                  th:action=""
+                  th:object="${horario}" method="post">
+
+                <input class="form-control" type="hidden" th:field="*{id}">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input class="form-control" id="nome" type="text" th:field="*{horario}" placeholder="Horario"
+                               th:errorclass="is-invalid" disabled>
+                        <label for="nome">horario</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('horario')}" th:errors="*{horario}"></div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input class="form-control" id="nomePaciente" type="text" th:field="*{nomePaciente}"
+                               placeholder="Email" th:errorclass="is-invalid">
+                        <label for="nomePaciente">Nome Paciente</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nomePaciente')}" th:errors="*{nomePaciente}"></div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input class="form-control" id="telefone" type="text" th:field="*{telefonePaciente}"
+                               placeholder="Telefone" th:errorclass="is-invalid">
+                        <label for="telefone">Telefone</label>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('telefonePaciente')}"
+                             th:errors="*{telefonePaciente}"></div>
+
+                    </div>
+                </div>
+                <hr/>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <input class="form-control" type="text" id="emailPaciente"
+                               th:field="*{emailPaciente}" placeholder="CPF" th:errorclass="is-invalid">
+                        <div class="invalid-feedback"
+                             th:if="${#fields.hasErrors('emailPaciente')}" th:errors="*{emailPaciente}"></div>
+                        <label th:if="${pessoa.tipoObjeto('paciente')}" for="emailPaciente">Email</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-primary btn-lg">Enviar</button>
+                <a th:href="@{/agendamento/form}" class="btn btn-secondary btn-lg">Voltar</a>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

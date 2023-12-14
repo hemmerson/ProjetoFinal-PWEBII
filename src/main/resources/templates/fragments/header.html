@@ -45,6 +45,7 @@
                             aria-expanded="false">Agendamento</button>
                     <ul class="dropdown-menu" aria-labelledby="dropdown04">
                         <li sec:authorize="hasAnyRole('MEDICO')"><a class="dropdown-item" th:href="@{/agendamento/disponibilidade}">Disponibilizar</a></li>
+                        <li sec:authorize="hasAnyRole('USER', 'ADMIN', 'MEDICO')"><a class="dropdown-item" th:href="@{/agendamento/form}">Agendar</a></li>
                     </ul>
                 </div>
                 <div class="nav-item dropdown">

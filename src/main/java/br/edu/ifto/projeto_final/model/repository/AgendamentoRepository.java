@@ -39,7 +39,12 @@ public class AgendamentoRepository {
         TypedQuery<Agendamento> query = em.createQuery(jpql, Agendamento.class);
         query.setParameter("data", data);
         query.setParameter("medico", m.getId());
-        return query.getSingleResult();
+        try {
+            return query.getSingleResult();
+        }catch (RuntimeException e){
+            Agendamento a = new Agendamento();
+            return a;
+        }
     }
 
     public void remove(Long id) {

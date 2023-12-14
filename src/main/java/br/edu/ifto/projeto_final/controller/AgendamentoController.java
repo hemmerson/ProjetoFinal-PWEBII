@@ -86,29 +86,27 @@ public class AgendamentoController {
         return new ModelAndView("/agendamento/agendamento", model);
     }
 
+    @PostMapping("/update")
+    public ModelAndView update(@Validated(Insert.class) Horario horario, BindingResult result, ModelMap model) {
+        if (result.hasErrors()){
+            return new ModelAndView("/agendamento/agendar", model);
+        }
+        horarioRepository.update(horario);
+        model.addAttribute("dataAgendamento", horario.getAgendamento().getData());
+        model.addAttribute("medico.id", horario.getAgendamento().getMedico().getId());
+        return new ModelAndView("redirect:/agendamento/list");
+    }
 
-//    @GetMapping("/edit/{id}")
-//    public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
-//        model.addAttribute("pacientes", repository.consulta(id).getPaciente());
-//        model.addAttribute("medicos", repository.consulta(id).getMedico());
-//        model.addAttribute("consulta", repository.consulta(id));
-//        return new ModelAndView("/consulta/form", model);
-//    }
+    @GetMapping("/edit/{id}")
+    public ModelAndView edit(@PathVariable("id") Long id, ModelMap model) {
+        model.addAttribute("horario", horarioRepository.horario(id));
+        return new ModelAndView("/agendamento/agendar", model);
+    }
 //
 //    @GetMapping("/details/{id}")
 //    public ModelAndView details(@PathVariable("id") Long id, ModelMap model) {
 //        model.addAttribute("consulta", repository.consulta(id));
 //        return new ModelAndView("/consulta/details", model);
 //    }
-//
-//    @PostMapping("/update")
-//    public ModelAndView update(@Validated(Insert.class) Consulta consulta, BindingResult result, ModelMap model) {
-//        if (result.hasErrors()){
-//            model.addAttribute("pacientes", pacienteRepository.pacientes());
-//            model.addAttribute("medicos", medicoRepository.medicos());
-//            return new ModelAndView("/consulta/form", model);
-//        }
-//        repository.update(consulta);
-//        return new ModelAndView("redirect:/consultas/list");
-//    }
+
 }

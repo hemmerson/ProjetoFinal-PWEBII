@@ -8,7 +8,7 @@
 
 <body>
 <main>
-    <div class="container">
+    <div class="container mb-5">
         <h1>Agendamento</h1>
         <hr>
         <div class="row mt-5">
@@ -46,8 +46,7 @@
                 <td th:text="${a.nomePaciente}"></td>
                 <td th:text="${a.telefonePaciente}"></td>
                 <td th:text="${a.emailPaciente}"></td>
-<!--                <td><a class="btn btn-outline-secondary" th:href="@{/consultas/edit/{id}(id=${c.id})}"-->
-<!--                       sec:authorize="hasAnyRole('ADMIN', 'MEDICO', 'USER')">Editar</a></td>-->
+                <td><a class="btn btn-outline-primary" th:href="@{/agendamento/edit/{id}(id=${a.id})}" >Editar</a></td>
             </tr>
         </table>
         <a class="btn btn-secondary" th:href="@{/agendamento/form}">Voltar</a>
