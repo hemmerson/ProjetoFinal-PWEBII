@@ -19,25 +19,29 @@ public class Horario implements Serializable {
     private String nomePaciente;
     private String telefonePaciente;
     private String emailPaciente;
+    private String status = "Indisponível";
 
     @ManyToOne
     private Agendamento agendamento;
     public Horario() {
     }
 
-    public Horario(LocalTime horario, String nomePaciente, String telefonePaciente, String emailPaciente) {
-        this.horario = horario;
-        this.nomePaciente = nomePaciente;
-        this.telefonePaciente = telefonePaciente;
-        this.emailPaciente = emailPaciente;
-    }
-
-    public Horario(Long id, LocalTime horario, String nomePaciente, String telefonePaciente, String emailPaciente, Agendamento agendamento) {
+    public Horario(Long id, LocalTime horario, String nomePaciente, String telefonePaciente, String emailPaciente, String status) {
         this.id = id;
         this.horario = horario;
         this.nomePaciente = nomePaciente;
         this.telefonePaciente = telefonePaciente;
         this.emailPaciente = emailPaciente;
+        this.status = status;
+    }
+
+    public Horario(Long id, LocalTime horario, String nomePaciente, String telefonePaciente, String emailPaciente, String status, Agendamento agendamento) {
+        this.id = id;
+        this.horario = horario;
+        this.nomePaciente = nomePaciente;
+        this.telefonePaciente = telefonePaciente;
+        this.emailPaciente = emailPaciente;
+        this.status = status;
         this.agendamento = agendamento;
     }
 
@@ -79,6 +83,14 @@ public class Horario implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Agendamento getAgendamento() {
